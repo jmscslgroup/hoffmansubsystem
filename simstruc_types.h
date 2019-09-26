@@ -1,4 +1,4 @@
-/* Copyright 1990-2016 The MathWorks, Inc. */
+/* Copyright 1990-2017 The MathWorks, Inc. */
 
 /*
  *
@@ -138,6 +138,16 @@ struct _rtTimingBridge_tag
     boolean_T**  rateTransition;
 
     boolean_T    *firstInitCond;
+};
+
+typedef struct _rtCtrlRateMdlRefTiming_tag rtCtrlRateMdlRefTiming;
+
+struct _rtCtrlRateMdlRefTiming_tag
+{
+
+    uint32_T firstCtrlRateTID;
+    uint32_T* numTicksToNextHitForCtrlRate;
+
 };
 
 #endif /* MODEL_REFERENCE_TYPES */
@@ -335,5 +345,35 @@ typedef enum
     SS_STRUCTURE_FORMAT = 5,
     SS_STRUCTUREWITHTIME_FORMAT = 6
 } SSLoggingSaveFormat;
+
+/*======================================================*
+ * Types for Simulink Functions access from S-functions *
+ *======================================================*/
+
+#ifndef SIMULINK_FUNCTION_TYPES
+#define SIMULINK_FUNCTION_TYPES
+typedef struct _ssFcnCallExecArgInfo_tag {
+    void       *dataPtr;
+    int_T       dataSize;
+    void       *reserved;
+} _ssFcnCallExecArgInfo;
+
+typedef struct _ssFcnCallExecData_tag {
+    const char *fcnName;
+    void *reserved;
+} _ssFcnCallExecData;
+
+typedef struct _ssFcnCallExecArgs_tag {
+    int_T                  numInArgs;
+    int_T                  numOutArgs;
+    _ssFcnCallExecArgInfo  *inArgs;
+    _ssFcnCallExecArgInfo  *outArgs;
+    _ssFcnCallExecData     *execData;
+    void                   *reserved;
+} _ssFcnCallExecArgs;
+
+typedef _ssFcnCallExecArgs ssFcnCallExecArgs;
+
+#endif /* SIMULINK_FUNCTION_TYPES */
 
 #endif /* __SIMSTRUC_TYPES_H__ */

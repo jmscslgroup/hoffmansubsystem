@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.478
- * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C++ source code generated on : Wed May 16 21:11:53 2018
+ * Model version              : 1.493
+ * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
+ * C++ source code generated on : Sat Sep 21 15:34:00 2019
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -21,8 +21,11 @@
 #include "hoffmansubsystem.h"
 #include "hoffmansubsystem_private.h"
 
-/* Block parameters (auto storage) */
+/* Block parameters (default storage) */
 P_hoffmansubsystem_T hoffmansubsystem_P = {
+  /* Computed Parameter: Out1_Y0
+   * Referenced by: '<S17>/Out1'
+   */
   {
     {
       0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U,
@@ -108,10 +111,11 @@ P_hoffmansubsystem_T hoffmansubsystem_P = {
         }                              /* Angular */
       }                                /* Twist */
     }                                  /* Twist */
-  },                                   /* Computed Parameter: Out1_Y0
-                                        * Referenced by: '<S21>/Out1'
-                                        */
+  },
 
+  /* Computed Parameter: Constant_Value
+   * Referenced by: '<S7>/Constant'
+   */
   {
     {
       0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U,
@@ -197,10 +201,11 @@ P_hoffmansubsystem_T hoffmansubsystem_P = {
         }                              /* Angular */
       }                                /* Twist */
     }                                  /* Twist */
-  },                                   /* Computed Parameter: Constant_Value
-                                        * Referenced by: '<S8>/Constant'
-                                        */
+  },
 
+  /* Computed Parameter: Constant_Value_b
+   * Referenced by: '<S2>/Constant'
+   */
   {
     {
       0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U,
@@ -256,90 +261,123 @@ P_hoffmansubsystem_T hoffmansubsystem_P = {
         0.0                            /* W */
       }                                /* Orientation */
     }                                  /* Pose */
-  },                                   /* Computed Parameter: Constant_Value_b
-                                        * Referenced by: '<S2>/Constant'
-                                        */
+  },
 
-  {
-    {
-      0.0,                             /* X */
-      0.0,                             /* Y */
-      0.0                              /* Z */
-    },                                 /* Linear */
-
-    {
-      0.0,                             /* X */
-      0.0,                             /* Y */
-      0.0                              /* Z */
-    }                                  /* Angular */
-  },                                   /* Computed Parameter: Out1_Y0_n
-                                        * Referenced by: '<S22>/Out1'
-                                        */
-
-  {
-    {
-      0.0,                             /* X */
-      0.0,                             /* Y */
-      0.0                              /* Z */
-    },                                 /* Linear */
-
-    {
-      0.0,                             /* X */
-      0.0,                             /* Y */
-      0.0                              /* Z */
-    }                                  /* Angular */
-  },                                   /* Computed Parameter: Constant_Value_j
-                                        * Referenced by: '<S9>/Constant'
-                                        */
-
-  {
-    {
-      0.0,                             /* X */
-      0.0,                             /* Y */
-      0.0                              /* Z */
-    },                                 /* Linear */
-
-    {
-      0.0,                             /* X */
-      0.0,                             /* Y */
-      0.0                              /* Z */
-    }                                  /* Angular */
-  },                                   /* Computed Parameter: Constant_Value_l
-                                        * Referenced by: '<S1>/Constant'
-                                        */
-  0.0,                                 /* Expression: 0
-                                        * Referenced by: '<S4>/k1'
-                                        */
-  1.0,                                 /* Expression: 1
-                                        * Referenced by: '<S7>/pathChoice '
-                                        */
-  36.6,                                /* Expression: 36.6
-                                        * Referenced by: '<S7>/radius'
-                                        */
-
-  /*  Expression: [36.606 0]
-   * Referenced by: '<S7>/start point'
+  /* Computed Parameter: Out1_Y0_n
+   * Referenced by: '<S18>/Out1'
    */
-  { 36.606, 0.0 },
-  36.6,                                /* Expression: 36.6
-                                        * Referenced by: '<S7>/len'
-                                        */
-  0.0,                                 /* Expression: 0
-                                        * Referenced by: '<S7>/heading'
-                                        */
-  4.0,                                 /* Expression: 4
-                                        * Referenced by: '<S4>/Switch'
-                                        */
-  0.7,                                 /* Expression: .7
-                                        * Referenced by: '<S4>/k'
-                                        */
-  -1.0,                                /* Expression: -1
-                                        * Referenced by: '<S4>/Gain'
-                                        */
-  0.0,                                 /* Expression: 0
-                                        * Referenced by: '<S11>/Constant'
-                                        */
-  0.5                                  /* Expression: 0.5
-                                        * Referenced by: '<S27>/1//2'
-                                        */
+  {
+    {
+      0.0,                             /* X */
+      0.0,                             /* Y */
+      0.0                              /* Z */
+    },                                 /* Linear */
+
+    {
+      0.0,                             /* X */
+      0.0,                             /* Y */
+      0.0                              /* Z */
+    }                                  /* Angular */
+  },
+
+  /* Computed Parameter: Constant_Value_j
+   * Referenced by: '<S8>/Constant'
+   */
+  {
+    {
+      0.0,                             /* X */
+      0.0,                             /* Y */
+      0.0                              /* Z */
+    },                                 /* Linear */
+
+    {
+      0.0,                             /* X */
+      0.0,                             /* Y */
+      0.0                              /* Z */
+    }                                  /* Angular */
+  },
+
+  /* Computed Parameter: Constant_Value_l
+   * Referenced by: '<S1>/Constant'
+   */
+  {
+    {
+      0.0,                             /* X */
+      0.0,                             /* Y */
+      0.0                              /* Z */
+    },                                 /* Linear */
+
+    {
+      0.0,                             /* X */
+      0.0,                             /* Y */
+      0.0                              /* Z */
+    }                                  /* Angular */
+  },
+
+  /* Computed Parameter: Constant_Value_o
+   * Referenced by: '<S11>/Constant'
+   */
+  {
+    0.0                                /* Data */
+  },
+
+  /* Expression: 0
+   * Referenced by: '<S3>/k1'
+   */
+  0.0,
+
+  /* Expression: 1
+   * Referenced by: '<S23>/Constant'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S24>/Constant'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S6>/pathChoice '
+   */
+  1.0,
+
+  /* Expression: 0.0
+   * Referenced by: '<S6>/Constant'
+   */
+  0.0,
+
+  /* Expression: 36.6
+   * Referenced by: '<S6>/len'
+   */
+  36.6,
+
+  /* Expression: 0
+   * Referenced by: '<S6>/heading'
+   */
+  0.0,
+
+  /* Expression: 4
+   * Referenced by: '<S3>/Switch'
+   */
+  4.0,
+
+  /* Expression: .7
+   * Referenced by: '<S3>/k'
+   */
+  0.7,
+
+  /* Expression: -1
+   * Referenced by: '<S3>/Gain'
+   */
+  -1.0,
+
+  /* Expression: 0
+   * Referenced by: '<S10>/Constant'
+   */
+  0.0,
+
+  /* Expression: 0.5
+   * Referenced by: '<S28>/1//2'
+   */
+  0.5
 };

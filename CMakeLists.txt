@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 2.8.3)
 project(hoffmansubsystem)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
+## Make top-level project name available in all nested projects.
+set(MW_TOP_LEVEL_PROJECT_NAME ${PROJECT_NAME})
+
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -14,7 +18,7 @@ visualization_msgs
 )
 
 add_definitions(
--DMODEL=hoffmansubsystem -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DUNIX -DINTEGER_CODE=0 -DMT=0 -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DONESTEPFCN=1 -DTERMFCN=1 -DMULTI_INSTANCE_CODE=0 -DTID01EQ=0 -DROS_PROJECT -DMW_SCHED_OTHER -DSTACK_SIZE=64 -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__ -DRT=RT )
+-DMODEL=hoffmansubsystem -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0 -DUNIX -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTID01EQ=0 -DONESTEPFCN=1 -DTERMFCN=1 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0 -DROS_PROJECT -DMW_SCHED_OTHER -DSTACK_SIZE=64 -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__ -DRT=RT )
 
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
@@ -42,6 +46,8 @@ include_directories(
 
 ## Get list of .c files in project source directory
 file(GLOB ${PROJECT_NAME}_C_SOURCES RELATIVE ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/*.c)
+## Get list of .cpp files in project source directory
+file(GLOB ${PROJECT_NAME}_CPP_SOURCES RELATIVE ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/*.cpp)
 
 ## Declare executable
 add_executable(${PROJECT_NAME}_node
@@ -56,6 +62,7 @@ add_executable(${PROJECT_NAME}_node
    slros_initialize.cpp
    slros_generic_param.cpp
    ${${PROJECT_NAME}_C_SOURCES}
+   ${${PROJECT_NAME}_CPP_SOURCES}
 )
 
 ## Add cmake target dependencies of the executable/library

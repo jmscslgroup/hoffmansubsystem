@@ -1,4 +1,4 @@
-/* Copyright 2015 The MathWorks, Inc. */
+/* Copyright 2015-2018 The MathWorks, Inc. */
 
 #ifndef _SLROS_MSGCONVERT_UTILS_H_
 #define _SLROS_MSGCONVERT_UTILS_H_
@@ -57,7 +57,7 @@ namespace slros
     
     
     /**
-     * EnabledWarning indicates that warnings should be emitted in a ROS-approriate 
+     * EnabledWarning indicates that warnings should be emitted in a ROS-appropriate 
      * manner. This class expects SLROSNodeName to be defined (the name of the 
      * Simulink ROS node)
      *
@@ -105,24 +105,42 @@ namespace slros
         return ros::message_traits::DataType<MsgType>::value();
     }
     
+    
     /**
      * Calculate the number of items in a fixed-size simple array.
      * "Constant size" refers to an array that is declared like "MyType foo[N]"
      * (as opposed to a STL container like vector).
      * "Simple array" means that the size of an array items is completely known
      * at compile time (specifically, a vanilla C struct).
+     * 
+     * This is a template specialization that requires the "array" input to 
+     * be passed as a reference to an array.
      *
      * @param array Reference to the array. Do not pass in a pointer!
      * @retval int The number of items in the array
      */
+    template <typename ArrayType, size_t N>
+    inline int getNumItemsInFixedSimpleArray(ArrayType (&array)[N])
+    {
+        return N;
+    }  
+    
+    /**
+     * Template specialization for the case where this function is called with a scalar.    
+     * Always return 1. See the other template specialization above for 
+     * supporting array input.
+     *
+     * @param array Reference to a scalar.
+     * @return Will always be 1 (number of items in a scalar :-)
+     */
     template <typename ArrayType>
     inline int getNumItemsInFixedSimpleArray(ArrayType &array)
     {
-        return (sizeof array) /  (sizeof array[0]);
-    }        
+        return 1;
+    }    
     
     /**
-     * When converting a roscpp message to a Simulink bus array, the 
+     * When converting a roscpp message to a Simulink bus array, the
      * ReceivedLength and CurrentLength values for the Simulink BusInfo
      * struct need to be set appropriately. This utility function sets  
      * these values and emits a truncation warning if needed. 
@@ -133,7 +151,7 @@ namespace slros
      *
      * @param busProp[in]      Variable-length array property in Simulink bus
      * @param busInfoProp[out] Info property in Simulink bus corresponding to variable-length array
-     * @param msgProp[in]      Variable-length array property in in roscpp message
+     * @param msgProp[in]      Variable-length array property in roscpp message
      * @param warnStatus[in]   Handler for warnings during conversion
      * @retval int             The number of items to be copied (aka. CurrentLength)
      */    
@@ -144,7 +162,7 @@ namespace slros
         const int numItemsReceived = msgProp.size();
         const int maxBusArraySize = slros::getNumItemsInFixedSimpleArray(busProp);
         const int numItemsToCopy = std::min(numItemsReceived, maxBusArraySize);
-        
+		
         busInfoProp.ReceivedLength = numItemsReceived;
         busInfoProp.CurrentLength = numItemsToCopy;
         
@@ -153,7 +171,187 @@ namespace slros
             warnStatus.emitTruncationWarning(numItemsReceived, maxBusArraySize);
         }
         return numItemsToCopy;
+    }      
+        
+    /**
+     * Convert data in an array roscpp message property to an array bus property.
+     * 
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to an array. If "busProp" points to a scalar,
+     * see the other template specialization.
+     *
+     * @param[in] msgProp Array property in roscpp message
+     * @param[in,out] busProp Array property in Simulink bus
+     * @param[in] idx Index in array to convert
+     */
+    template <typename BusType, typename MsgType, size_t N>
+            inline void convertToBusInNested(const MsgType &msgProp, BusType (&busProp)[N], int idx)
+    {
+        convertToBus(&busProp[idx], &msgProp[idx]);
     }
+    
+    /**
+     * Convert data in an array roscpp message property to a scalar bus property.
+     * 
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to a scalar value. If "busProp" points to an array,
+     * see the other template specialization.
+     *
+     * @param[in] msgProp Array property in roscpp message
+     * @param[in,out] busProp Scalar property in Simulink bus
+     * @param[in] idx Index in array to convert
+     */
+    template <typename BusType, typename MsgType>
+            inline void convertToBusInNested(const MsgType &msgProp, BusType &busProp, int idx)
+    {
+        convertToBus(&busProp, &msgProp[idx]);
+    }
+    
+    /**
+     * Convert data in an array bus property to an array roscpp message property
+     * 
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to an array. If "busProp" points to a scalar,
+     * see the other template specialization.
+     *
+     * @param[in] busProp Array property in Simulink bus
+     * @param[in,out] msgProp Array property in roscpp message
+     * @param[in] idx Index in array to convert
+     */
+    template <typename BusType, typename MsgType, size_t N>
+            inline void convertFromBusInNested(const BusType (&busProp)[N], MsgType &msgProp, int idx)
+    {
+        convertFromBus(&msgProp[idx], &busProp[idx]);
+    }
+    
+    /**
+     * Convert data in a scalar bus property to an array roscpp message property
+     * 
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to a scalar value. If "busProp" points to an array,
+     * see the other template specialization.
+     *
+     * @param[in] busProp Scalar property in Simulink bus
+     * @param[in,out] msgProp Array property in roscpp message
+     * @param[in] idx Index in array to convert
+     */
+    template <typename BusType, typename MsgType>
+            inline void convertFromBusInNested(const BusType &busProp, MsgType &msgProp, int idx)
+    {
+        convertFromBus(&msgProp[idx], &busProp);
+    }
+    
+    /**
+     * Copy data from an array roscpp message property to an array bus property.
+     * 
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to an array. If "busProp" points to a scalar,
+     * see the other template specialization.
+     *
+     * @param[in] msgProp Array property in roscpp message
+     * @param[in,out] busProp Array property in Simulink bus
+     * @param[in] numItemsToCopy Number of elements to copy from the array
+     */
+    template <typename MsgType, typename BusType, size_t N>
+            inline void copyToBusPrimitiveArray(const MsgType &msgProp, BusType (&busProp)[N], int numItemsToCopy)
+    {
+        std::copy(msgProp.begin(), msgProp.begin() + numItemsToCopy, busProp);
+    }
+    
+    /**
+     * Copy data from an array roscpp message property to a scalar bus property.
+     * 
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to a scalar value. If "busProp" points to an array,
+     * see the other template specialization.
+     *
+     * @param[in] msgProp Array property in roscpp message
+     * @param[in,out] busProp Scalar property in Simulink bus
+     * @param[in] numItemsToCopy Number of elements to copy from the array
+     */
+    template <typename MsgType, typename BusType>
+            inline void copyToBusPrimitiveArray(const MsgType &msgProp, BusType& busProp, int numItemsToCopy)
+    {
+        std::copy(msgProp.begin(), msgProp.begin() + numItemsToCopy, &busProp);
+    }
+    
+    /**
+     * Copy data from an array bus property to an array roscpp message property
+     * 
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to an array. If "busProp" points to a scalar,
+     * see the other template specialization.
+     *
+     * @param[in] busProp Array property in Simulink bus
+     * @param[in,out] msgProp Array property in roscpp message
+     * @param[in] numItemsToCopy Number of elements to copy from the array
+     */
+    template <typename MsgType, typename BusType, size_t N>
+            inline void copyFromBusPrimitiveArray(const BusType (&busProp)[N], MsgType &msgProp, int numItemsToCopy)
+    {
+        std::copy(busProp, busProp + numItemsToCopy, msgProp.begin());
+    }
+    
+    /**
+     * Copy data from a scalar bus property to an array roscpp message property
+     * 
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to a scalar value. If "busProp" points to an array,
+     * see the other template specialization.
+     *
+     * @param[in] busProp Scalar property in Simulink bus
+     * @param[in,out] msgProp Array property in roscpp message
+     * @param[in] numItemsToCopy Number of elements to copy from the array
+     */
+    template <typename MsgType, typename BusType>
+            inline void copyFromBusPrimitiveArray(const BusType &busProp, MsgType &msgProp, int numItemsToCopy)
+    {
+        std::copy(&busProp, &busProp + numItemsToCopy, msgProp.begin());
+    }    
+
+    
+    /**
+     * Copy single string from an array roscpp message property to an array bus property
+     *
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to an array. If "busProp" points to a scalar,
+     * see the other template specialization.
+     *
+     * @param[in] msgProp Array property in roscpp message
+     * @param[in,out] busProp Array property in Simulink bus
+     * @param[in] warnStatus Handler for warnings during conversion
+     * @param[in] idx Index in array to copy
+     */       
+    template <typename BusType, typename MsgType, size_t N>
+    inline void copyToBusStringInStringArray(const MsgType &msgProp, BusType (&busProp)[N], 
+					     const slros::ROSPropertyWarnStatus &warnStatus, int idx)
+    {
+        const int numCharsToCopy = slros::setReceivedAndCurrentLengths(
+                    busProp[idx].Data, busProp[idx].Data_SL_Info, msgProp[idx], warnStatus);
+            slros::copyToBusPrimitiveArray(msgProp[idx], busProp[idx].Data, numCharsToCopy);            
+    }
+    
+    /**
+     * Copy single string from an array roscpp message property to a scalar bus property
+     *
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to a scalar value. If "busProp" points to an array,
+     * see the other template specialization.
+     *
+     * @param[in] msgProp Array property in roscpp message
+     * @param[in,out] busProp Scalar property in Simulink bus
+     * @param[in] warnStatus Handler for warnings during conversion
+     * @param[in] idx Index in array to copy
+     */    
+    template <typename BusType, typename MsgType>
+    inline void copyToBusStringInStringArray(const MsgType &msgProp, BusType &busProp, 
+					     const slros::ROSPropertyWarnStatus &warnStatus, int idx)
+    {
+        const int numCharsToCopy = slros::setReceivedAndCurrentLengths(
+                    busProp.Data, busProp.Data_SL_Info, msgProp[idx], warnStatus);
+            slros::copyToBusPrimitiveArray(msgProp[idx], busProp.Data, numCharsToCopy);            
+    }
+    
     
     
     /**
@@ -178,12 +376,49 @@ namespace slros
     {        
         for (int i=0; i < numStringsToCopy; i++)
         {
-            const int numCharsToCopy = slros::setReceivedAndCurrentLengths(
-                    busProp[i].Data, busProp[i].Data_SL_Info, msgProp[i], warnStatus);
-            std::copy(msgProp[i].begin(), msgProp[i].begin() + numCharsToCopy, busProp[i].Data);
+            slros::copyToBusStringInStringArray(msgProp, busProp, warnStatus, i);
         }
     }
    
+    /**
+     * Copy single string from an array bus property to an array roscpp message property
+     *
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to an array. If "busProp" points to a scalar,
+     * see the other template specialization.
+     *
+     * @param[in] busProp Array property in Simulink bus
+     * @param[in,out] msgProp Array property in roscpp message
+     * @param[in] warnStatus Handler for warnings during conversion
+     * @param[in] idx Index in array to copy
+     */          
+    template <typename BusType, typename MsgType, size_t N>
+    inline void copyFromBusStringInStringArray(const BusType (&busProp)[N], MsgType &msgProp, int idx)
+    {
+        const int numCharsToCopy = busProp[idx].Data_SL_Info.CurrentLength;
+        msgProp[idx].resize(numCharsToCopy);
+        slros::copyFromBusPrimitiveArray(busProp[idx].Data, msgProp[idx], numCharsToCopy);
+    }
+    
+    /**
+     * Copy single string from a scalar bus property to an array roscpp message property
+     *
+     * This is a template specialization that requires the "busProp" input to 
+     * be passed as a reference to a scalar value. If "busProp" points to an array,
+     * see the other template specialization.
+     *
+     * @param[in] busProp Scalar property in Simulink bus
+     * @param[in,out] msgProp Array property in roscpp message
+     * @param[in] warnStatus Handler for warnings during conversion
+     * @param[in] idx Index in array to copy
+     */        
+    template <typename BusType, typename MsgType>
+    inline void copyFromBusStringInStringArray(const BusType &busProp, MsgType &msgProp, int idx)
+    {
+        const int numCharsToCopy = busProp.Data_SL_Info.CurrentLength;
+        msgProp[idx].resize(numCharsToCopy);
+        slros::copyFromBusPrimitiveArray(busProp.Data, msgProp[idx], numCharsToCopy);
+    }
     
     /**
      * Utility function to convert strings in a string array from a Simulink bus 
@@ -204,9 +439,7 @@ namespace slros
     {
         for (int i=0; i < numStringsToCopy; i++)
         {
-            const int numCharsToCopy = busProp[i].Data_SL_Info.CurrentLength;
-            msgProp[i].resize(numCharsToCopy);
-            std::copy(busProp[i].Data, busProp[i].Data + numCharsToCopy, msgProp[i].begin());
+            slros::copyFromBusStringInStringArray(busProp, msgProp, i);
         }
     }
 } // namespace slros
@@ -235,7 +468,7 @@ inline void convertToBusFixedNestedArray(BusType &busProp, MsgType &msgProp,
     const int numItemsToCopy = slros::getNumItemsInFixedSimpleArray(busProp);
     for (int i=0; i < numItemsToCopy; i++)
     {
-        convertToBus(&busProp[i], &msgProp[i]);
+        slros::convertToBusInNested(msgProp, busProp, i);
     }    
 }
 
@@ -249,7 +482,7 @@ inline void convertToBusFixedNestedArray(BusType &busProp, MsgType &msgProp,
  *
  * @param busProp[out]     Variable-length array property in Simulink bus
  * @param busInfoProp[out] Info property in Simulink bus corresponding to variable-length array
- * @param msgProp[in]      Variable-length array property in in roscpp message
+ * @param msgProp[in]      Variable-length array property in roscpp message
  * @param warnStatus[in]   Handler for warnings during conversion
  */
 template <typename BusType, typename BusInfoType, typename MsgType>
@@ -260,7 +493,7 @@ inline void convertToBusVariableNestedArray(BusType &busProp, BusInfoType &busIn
             busProp, busInfoProp, msgProp, warnStatus);    
     for (int i=0; i < numItemsToCopy; i++)
     {
-        convertToBus(&busProp[i], &msgProp[i]);
+        slros::convertToBusInNested(msgProp, busProp, i);
     }
 }
 
@@ -278,7 +511,7 @@ inline void convertFromBusFixedNestedArray(MsgType &msgProp, const BusType &busP
     const int numItemsToCopy = slros::getNumItemsInFixedSimpleArray(busProp);
     for (int i=0; i < numItemsToCopy; i++)
     {
-        convertFromBus(&msgProp[i], &busProp[i]);
+        slros::convertFromBusInNested(busProp, msgProp, i);
     }        
 }
 
@@ -287,7 +520,7 @@ inline void convertFromBusFixedNestedArray(MsgType &msgProp, const BusType &busP
  * Convert a single property (variable-length nested array of messages) 
  * from a Simulink bus to a roscpp message.
  *
- * @param msgProp[out]    Variable-length array property in in roscpp message
+ * @param msgProp[out]    Variable-length array property in roscpp message
  * @param busProp[in]     Variable-length array property in Simulink bus
  * @param busInfoProp[in] Info property in Simulink bus corresponding to variable-length array
  */
@@ -299,7 +532,7 @@ inline void convertFromBusVariableNestedArray(MsgType &msgProp,
     msgProp.resize(numItemsToCopy);
     for (int i=0; i < numItemsToCopy; i++)
     {
-        convertFromBus(&msgProp[i], &busProp[i]);
+        slros::convertFromBusInNested(busProp, msgProp, i);
     }     
 }
 
@@ -321,7 +554,7 @@ inline void convertToBusFixedPrimitiveArray(BusType &busProp, const MsgType &msg
         const slros::ROSPropertyWarnStatus &warnStatus)
 {    
     const int numItemsToCopy = slros::getNumItemsInFixedSimpleArray(busProp);
-    std::copy(msgProp.begin(), msgProp.begin() + numItemsToCopy, busProp);
+    slros::copyToBusPrimitiveArray(msgProp, busProp, numItemsToCopy);
 }
 
 
@@ -334,7 +567,7 @@ inline void convertToBusFixedPrimitiveArray(BusType &busProp, const MsgType &msg
  * 
  * @param busProp[out]     Variable-length array property in Simulink bus
  * @param busInfoProp[out] Info property in Simulink bus corresponding to variable-length array
- * @param msgProp[in]      Variable-length array property in in roscpp message
+ * @param msgProp[in]      Variable-length array property in roscpp message
  * @param warnStatus[in]   Handler for warnings during conversion
  */
 template <typename BusType, typename BusInfoType, typename MsgType>
@@ -343,7 +576,7 @@ inline void convertToBusVariablePrimitiveArray(BusType &busProp, BusInfoType &bu
 {        
     const int numItemsToCopy = slros::setReceivedAndCurrentLengths(
             busProp, busInfoProp, msgProp, warnStatus);
-    std::copy(msgProp.begin(), msgProp.begin() + numItemsToCopy, busProp);
+    slros::copyToBusPrimitiveArray(msgProp, busProp, numItemsToCopy);
 }
 
 
@@ -358,7 +591,7 @@ template <typename BusType, typename MsgType>
 inline void convertFromBusFixedPrimitiveArray(MsgType &msgProp, const BusType &busProp)
 {
     const int numItemsToCopy = slros::getNumItemsInFixedSimpleArray(busProp);
-    std::copy(busProp, busProp + numItemsToCopy, msgProp.begin());
+    slros::copyFromBusPrimitiveArray(busProp, msgProp, numItemsToCopy);
 }
 
 
@@ -376,7 +609,7 @@ inline void convertFromBusVariablePrimitiveArray(MsgType &msgProp,
 {
     const int numItemsToCopy = busInfoProp.CurrentLength;
     msgProp.resize(numItemsToCopy);
-    std::copy(busProp, busProp + numItemsToCopy, msgProp.begin());
+    slros::copyFromBusPrimitiveArray(busProp, msgProp, numItemsToCopy);
 }
 
 
@@ -426,7 +659,7 @@ inline void convertToBusVariableStringArray(BusType &busProp, BusInfoType &busIn
 
 /**
  * Convert a single property (fixed-length array of strings) 
- * from a Simulink bus to a roscpp messsage.
+ * from a Simulink bus to a roscpp message.
  *
  * @param msgProp[out]    Fixed-length string array property in roscpp message
  * @param busProp[in]     Fixed-length string array property in Simulink bus

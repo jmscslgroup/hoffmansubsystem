@@ -1,6 +1,5 @@
 /*
- * Copyright 1984-2016 The MathWorks, Inc.
- * All Rights Reserved.
+ * Copyright 1984-2018 The MathWorks, Inc.
  */
 
 #if defined(_MSC_VER)
@@ -795,6 +794,12 @@ typedef int mwSignedIndex;
 typedef size_t    mwSize;         /* unsigned pointer-width integer */
 typedef size_t    mwIndex;        /* unsigned pointer-width integer */
 typedef ptrdiff_t mwSignedIndex;  /* a signed pointer-width integer */
+#endif
+
+#ifndef _SLSIZE_
+#define _SLSIZE_
+typedef int SLIndex;
+typedef int SLSize;
 #endif
 
 #if (defined(_LP64) || defined(_WIN64)) && !defined(MX_COMPAT_32)

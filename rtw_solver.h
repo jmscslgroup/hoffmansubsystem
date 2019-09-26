@@ -1,5 +1,3 @@
-/* Copyright 1990-2016 The MathWorks, Inc. */
-
 /*
  * File: rtw_solver.h     
  *
@@ -7,6 +5,8 @@
  *   Type definitions for continuous-time solver support.
  *
  */
+
+/* Copyright 1990-2017 The MathWorks, Inc. */
 
 #ifndef RTW_SOLVER_H__
 #define RTW_SOLVER_H__
@@ -111,12 +111,13 @@ typedef struct _ssSolverInfo_tag {
     real_T      zcThreshold;
     int_T       zeroCrossAlgorithm;
     int_T       consecutiveZCsError;
-    boolean_T   blkStateChange;
+    boolean_T   CTOutputIncnstWithState;
     boolean_T   isComputingJacobian;
     slJmBdControl solverJacobianMethodControl;
     int_T       ignoredZcDiagnostic;
     int_T       maskedZcDiagnostic;
     boolean_T   isOutputMethodComputed;
+    int_T       solverOrder;
 } ssSolverInfo;
 
 /* Support old name RTWSolverInfo */
@@ -142,8 +143,14 @@ typedef ssSolverInfo RTWSolverInfo;
 #define rtsiSetSolverNeedsReset(S,sn) ((S)->solverNeedsReset = (sn))
 #define rtsiGetSolverNeedsReset(S)    (S)->solverNeedsReset
 
-#define rtsiSetBlkStateChange(S,sn) ((S)->blkStateChange = (sn))
-#define rtsiGetBlkStateChange(S)    (S)->blkStateChange
+#define rtsiSetContTimeOutputInconsistentWithStateAtMajorStep(S,sn) ((S)->CTOutputIncnstWithState  = (sn))
+#define rtsiGetContTimeOutputInconsistentWithStateAtMajorStep(S)    (S)->CTOutputIncnstWithState 
+
+#define rtsiSetBlkStateChange(S,sn) ((S)->CTOutputIncnstWithState  = (sn))
+#define rtsiGetBlkStateChange(S)    (S)->CTOutputIncnstWithState 
+
+#define rtsiSetBlockStateForSolverChangedAtMajorStep(S,sn) ((S)->solverNeedsReset = (sn))
+#define rtsiGetBlockStateForSolverChangedAtMajorStep(S)    (S)->solverNeedsReset
 
 #define rtsiSetSolverMode(S,sm) ((S)->solverMode = (sm))
 #define rtsiGetSolverMode(S)    (S)->solverMode
@@ -169,6 +176,9 @@ typedef ssSolverInfo RTWSolverInfo;
 
 #define rtsiSetSolverMaxOrder(S,smo) ((S)->solverMaxOrder = (smo))
 #define rtsiGetSolverMaxOrder(S)     (S)->solverMaxOrder
+
+#define rtsiSetSolverOrder(S,so) (ssGetSolverInfo(S)->solverOrder = (so))
+#define rtsiGetSolverOrder(S)    ssGetSolverInfo(S)->solverOrder
 
 #define rtsiSetSolverJacobianMethodControl(S,smcm)   (ssGetSolverInfo(S)->solverJacobianMethodControl = (smcm))
 #define rtsiGetSolverJacobianMethodControl(S)        ssGetSolverInfo(S)->solverJacobianMethodControl

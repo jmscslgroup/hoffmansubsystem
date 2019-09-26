@@ -9,11 +9,17 @@ SimulinkSubscriber<nav_msgs::Odometry, SL_Bus_hoffmansubsystem_nav_msgs_Odometry
 // For Block hoffmansubsystem/Velocity from control block 
 SimulinkSubscriber<geometry_msgs::Twist, SL_Bus_hoffmansubsystem_geometry_msgs_Twist> Sub_hoffmansubsystem_150;
 
+// For Block hoffmansubsystem/Hoffmann Controller1/Publish for follower vel
+SimulinkPublisher<std_msgs::Float64, SL_Bus_hoffmansubsystem_std_msgs_Float64> Pub_hoffmansubsystem_364;
+
 // For Block hoffmansubsystem/Publish for follower vel
 SimulinkPublisher<geometry_msgs::Twist, SL_Bus_hoffmansubsystem_geometry_msgs_Twist> Pub_hoffmansubsystem_21;
 
 // For Block hoffmansubsystem/Publish1
 SimulinkPublisher<visualization_msgs::InteractiveMarkerPose, SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9> Pub_hoffmansubsystem_88;
+
+// For Block hoffmansubsystem/Select desired path/Get Parameter1
+SimulinkParameterGetter<real64_T, double> ParamGet_hoffmansubsystem_351;
 
 void slros_node_init(int argc, char** argv)
 {

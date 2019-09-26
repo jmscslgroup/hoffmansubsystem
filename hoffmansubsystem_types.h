@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.478
- * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C++ source code generated on : Wed May 16 21:11:53 2018
+ * Model version              : 1.493
+ * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
+ * C++ source code generated on : Sat Sep 21 15:34:00 2019
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -120,6 +120,15 @@ typedef struct {
 
 #endif
 
+#ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_std_msgs_Float64_
+#define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_std_msgs_Float64_
+
+typedef struct {
+  real_T Data;
+} SL_Bus_hoffmansubsystem_std_msgs_Float64;
+
+#endif
+
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_PoseWithCovariance_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_PoseWithCovariance_
 
@@ -153,86 +162,54 @@ typedef struct {
 
 #endif
 
-/* Custom Type definition for MATLAB Function: '<S4>/calculate e' */
-#ifndef typedef_struct_T_hoffmansubsystem_T
-#define typedef_struct_T_hoffmansubsystem_T
-
-typedef struct {
-  int16_T f1;
-  int16_T f2;
-} struct_T_hoffmansubsystem_T;
-
-#endif                                 /*typedef_struct_T_hoffmansubsystem_T*/
-
 #ifndef typedef_robotics_slros_internal_block_T
 #define typedef_robotics_slros_internal_block_T
 
 typedef struct {
+  boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
+  boolean_T isSetupComplete;
 } robotics_slros_internal_block_T;
 
-#endif                                 /*typedef_robotics_slros_internal_block_T*/
+#endif                               /*typedef_robotics_slros_internal_block_T*/
+
+#ifndef typedef_d_robotics_slcore_internal_bl_T
+#define typedef_d_robotics_slcore_internal_bl_T
+
+typedef struct {
+  int16_T __dummy;
+} d_robotics_slcore_internal_bl_T;
+
+#endif                               /*typedef_d_robotics_slcore_internal_bl_T*/
 
 #ifndef typedef_robotics_slros_internal_blo_p_T
 #define typedef_robotics_slros_internal_blo_p_T
 
 typedef struct {
+  boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
+  boolean_T isSetupComplete;
+  real_T ticksUntilNextHit;
+  d_robotics_slcore_internal_bl_T SampleTimeHandler;
 } robotics_slros_internal_blo_p_T;
 
-#endif                                 /*typedef_robotics_slros_internal_blo_p_T*/
+#endif                               /*typedef_robotics_slros_internal_blo_p_T*/
 
-#ifndef typedef_struct_T_hoffmansubsystem_p_T
-#define typedef_struct_T_hoffmansubsystem_p_T
-
-typedef struct {
-  real_T f1[2];
-} struct_T_hoffmansubsystem_p_T;
-
-#endif                                 /*typedef_struct_T_hoffmansubsystem_p_T*/
-
-#ifndef typedef_struct_T_hoffmansubsystem_px_T
-#define typedef_struct_T_hoffmansubsystem_px_T
+#ifndef typedef_robotics_slros_internal_bl_px_T
+#define typedef_robotics_slros_internal_bl_px_T
 
 typedef struct {
-  char_T f1[4];
-} struct_T_hoffmansubsystem_px_T;
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+} robotics_slros_internal_bl_px_T;
 
-#endif                                 /*typedef_struct_T_hoffmansubsystem_px_T*/
+#endif                               /*typedef_robotics_slros_internal_bl_px_T*/
 
-#ifndef typedef_struct_T_hoffmansubsystem_pxo_T
-#define typedef_struct_T_hoffmansubsystem_pxo_T
-
-typedef struct {
-  char_T f1[8];
-} struct_T_hoffmansubsystem_pxo_T;
-
-#endif                                 /*typedef_struct_T_hoffmansubsystem_pxo_T*/
-
-#ifndef typedef_struct_T_hoffmansubsyste_pxo1_T
-#define typedef_struct_T_hoffmansubsyste_pxo1_T
-
-typedef struct {
-  char_T f1[7];
-} struct_T_hoffmansubsyste_pxo1_T;
-
-#endif                                 /*typedef_struct_T_hoffmansubsyste_pxo1_T*/
-
-#ifndef typedef_struct_T_hoffmansubsyst_pxo1n_T
-#define typedef_struct_T_hoffmansubsyst_pxo1n_T
-
-typedef struct {
-  char_T f1[8];
-  char_T f2[7];
-  char_T f3[6];
-} struct_T_hoffmansubsyst_pxo1n_T;
-
-#endif                                 /*typedef_struct_T_hoffmansubsyst_pxo1n_T*/
-
-/* Parameters (auto storage) */
+/* Parameters (default storage) */
 typedef struct P_hoffmansubsystem_T_ P_hoffmansubsystem_T;
 
 /* Forward declaration for rtModel */
 typedef struct tag_RTM_hoffmansubsystem_T RT_MODEL_hoffmansubsystem_T;
 
-#endif                                 /* RTW_HEADER_hoffmansubsystem_types_h_ */
+#endif                                /* RTW_HEADER_hoffmansubsystem_types_h_ */

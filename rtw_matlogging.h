@@ -34,6 +34,7 @@ typedef struct RTWLogDataTypeConvert_tag {
 
 } RTWLogDataTypeConvert;
 
+typedef void (*RTWPreprocessingFcnPtr)(void*, const void*);
 
 typedef struct RTWLogSignalInfo_tag {
     int_T           numSignals;
@@ -46,6 +47,7 @@ typedef struct RTWLogSignalInfo_tag {
     BuiltInDTypeId *dataTypes;
     int_T          *complexSignals;
     int_T          *frameData;
+    RTWPreprocessingFcnPtr* preprocessingPtrs;
 
     union {
         const char_T** cptr;

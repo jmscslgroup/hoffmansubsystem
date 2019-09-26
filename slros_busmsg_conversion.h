@@ -11,6 +11,7 @@
 #include <geometry_msgs/Vector3.h>
 #include <nav_msgs/Odometry.h>
 #include <ros/time.h>
+#include <std_msgs/Float64.h>
 #include <std_msgs/Header.h>
 #include <visualization_msgs/InteractiveMarkerPose.h>
 #include "hoffmansubsystem_types.h"
@@ -43,6 +44,9 @@ void convertToBus(SL_Bus_hoffmansubsystem_nav_msgs_Odometry* busPtr, nav_msgs::O
 
 void convertFromBus(ros::Time* msgPtr, SL_Bus_hoffmansubsystem_ros_time_Time const* busPtr);
 void convertToBus(SL_Bus_hoffmansubsystem_ros_time_Time* busPtr, ros::Time const* msgPtr);
+
+void convertFromBus(std_msgs::Float64* msgPtr, SL_Bus_hoffmansubsystem_std_msgs_Float64 const* busPtr);
+void convertToBus(SL_Bus_hoffmansubsystem_std_msgs_Float64* busPtr, std_msgs::Float64 const* msgPtr);
 
 void convertFromBus(std_msgs::Header* msgPtr, SL_Bus_hoffmansubsystem_std_msgs_Header const* busPtr);
 void convertToBus(SL_Bus_hoffmansubsystem_std_msgs_Header* busPtr, std_msgs::Header const* msgPtr);

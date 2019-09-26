@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.478
- * Simulink Coder version : 8.12 (R2017a) 16-Feb-2017
- * C++ source code generated on : Wed May 16 21:11:53 2018
+ * Model version              : 1.493
+ * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
+ * C++ source code generated on : Sat Sep 21 15:34:00 2019
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -25,4 +25,4 @@
 
 extern real_T rt_atan2d_snf(real_T u0, real_T u1);
 
-#endif                                 /* RTW_HEADER_hoffmansubsystem_private_h_ */
+#endif                              /* RTW_HEADER_hoffmansubsystem_private_h_ */
