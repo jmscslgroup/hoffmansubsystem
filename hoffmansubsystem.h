@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.493
+ * Model version              : 1.503
  * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
- * C++ source code generated on : Sat Sep 21 15:34:00 2019
+ * C++ source code generated on : Mon Oct 28 21:42:10 2019
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -55,19 +55,17 @@ typedef struct {
   creal_T r[3001];
   real_T ys[3001];                     /* '<S6>/straight line' */
   real_T xs[3001];                     /* '<S6>/straight line' */
-  SL_Bus_hoffmansubsystem_nav_msgs_Odometry In1;/* '<S17>/In1' */
+  SL_Bus_hoffmansubsystem_nav_msgs_Odometry In1;/* '<S15>/In1' */
   SL_Bus_hoffmansubsystem_nav_msgs_Odometry b_varargout_2;
   SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9 BusAssignment2;/* '<Root>/Bus Assignment2' */
-  SL_Bus_hoffmansubsystem_geometry_msgs_Twist In1_k;/* '<S18>/In1' */
+  SL_Bus_hoffmansubsystem_geometry_msgs_Twist In1_k;/* '<S16>/In1' */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist BusAssignment1;/* '<Root>/Bus Assignment1' */
-  char_T cv0[16];
   creal_T r_m;
   real_T etmp;
-  real_T Product3;                     /* '<S21>/Product3' */
-  real_T Product2;                     /* '<S21>/Product2' */
-  real_T q0;                           /* '<S28>/q0' */
+  real_T Product3;                     /* '<S19>/Product3' */
+  real_T Product2;                     /* '<S19>/Product2' */
+  real_T q0;                           /* '<S26>/q0' */
   real_T rtb_sincos_o2_idx_0;
-  SL_Bus_hoffmansubsystem_std_msgs_Float64 BusAssignment1_p;/* '<S3>/Bus Assignment1' */
 } B_hoffmansubsystem_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -75,7 +73,6 @@ typedef struct {
   robotics_slros_internal_blo_p_T obj; /* '<S6>/Get Parameter1' */
   robotics_slros_internal_block_T obj_p;/* '<S5>/SinkBlock' */
   robotics_slros_internal_block_T obj_m;/* '<S4>/SinkBlock' */
-  robotics_slros_internal_block_T obj_g;/* '<S12>/SinkBlock' */
   robotics_slros_internal_bl_px_T obj_pa;/* '<S8>/SourceBlock' */
   robotics_slros_internal_bl_px_T obj_i;/* '<S7>/SourceBlock' */
   struct {
@@ -87,13 +84,12 @@ typedef struct {
   boolean_T objisempty_g;              /* '<S6>/Get Parameter1' */
   boolean_T objisempty_h;              /* '<S5>/SinkBlock' */
   boolean_T objisempty_m;              /* '<S4>/SinkBlock' */
-  boolean_T objisempty_gv;             /* '<S12>/SinkBlock' */
 } DW_hoffmansubsystem_T;
 
 /* Parameters (default storage) */
 struct P_hoffmansubsystem_T_ {
   SL_Bus_hoffmansubsystem_nav_msgs_Odometry Out1_Y0;/* Computed Parameter: Out1_Y0
-                                                     * Referenced by: '<S17>/Out1'
+                                                     * Referenced by: '<S15>/Out1'
                                                      */
   SL_Bus_hoffmansubsystem_nav_msgs_Odometry Constant_Value;/* Computed Parameter: Constant_Value
                                                             * Referenced by: '<S7>/Constant'
@@ -102,7 +98,7 @@ struct P_hoffmansubsystem_T_ {
                                                                       * Referenced by: '<S2>/Constant'
                                                                       */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist Out1_Y0_n;/* Computed Parameter: Out1_Y0_n
-                                                         * Referenced by: '<S18>/Out1'
+                                                         * Referenced by: '<S16>/Out1'
                                                          */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist Constant_Value_j;/* Computed Parameter: Constant_Value_j
                                                                 * Referenced by: '<S8>/Constant'
@@ -110,17 +106,14 @@ struct P_hoffmansubsystem_T_ {
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist Constant_Value_l;/* Computed Parameter: Constant_Value_l
                                                                 * Referenced by: '<S1>/Constant'
                                                                 */
-  SL_Bus_hoffmansubsystem_std_msgs_Float64 Constant_Value_o;/* Computed Parameter: Constant_Value_o
-                                                             * Referenced by: '<S11>/Constant'
-                                                             */
   real_T k1_Value;                     /* Expression: 0
                                         * Referenced by: '<S3>/k1'
                                         */
   real_T Constant_Value_je;            /* Expression: 1
-                                        * Referenced by: '<S23>/Constant'
+                                        * Referenced by: '<S21>/Constant'
                                         */
-  real_T Constant_Value_of;            /* Expression: 1
-                                        * Referenced by: '<S24>/Constant'
+  real_T Constant_Value_o;             /* Expression: 1
+                                        * Referenced by: '<S22>/Constant'
                                         */
   real_T pathChoice_Value;             /* Expression: 1
                                         * Referenced by: '<S6>/pathChoice '
@@ -147,7 +140,7 @@ struct P_hoffmansubsystem_T_ {
                                         * Referenced by: '<S10>/Constant'
                                         */
   real_T u2_Gain;                      /* Expression: 0.5
-                                        * Referenced by: '<S28>/1//2'
+                                        * Referenced by: '<S26>/1//2'
                                         */
 };
 
@@ -231,23 +224,21 @@ extern "C" {
  * '<S8>'   : 'hoffmansubsystem/Velocity from control block '
  * '<S9>'   : 'hoffmansubsystem/quaternion2heading'
  * '<S10>'  : 'hoffmansubsystem/yaw2quat'
- * '<S11>'  : 'hoffmansubsystem/Hoffmann Controller1/Blank Message for cmd_vel'
- * '<S12>'  : 'hoffmansubsystem/Hoffmann Controller1/Publish for follower vel'
- * '<S13>'  : 'hoffmansubsystem/Hoffmann Controller1/calculate delta'
- * '<S14>'  : 'hoffmansubsystem/Hoffmann Controller1/calculate e'
- * '<S15>'  : 'hoffmansubsystem/Select desired path/circle centered'
- * '<S16>'  : 'hoffmansubsystem/Select desired path/straight line'
- * '<S17>'  : 'hoffmansubsystem/Subscribe3/Enabled Subsystem'
- * '<S18>'  : 'hoffmansubsystem/Velocity from control block /Enabled Subsystem'
- * '<S19>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles'
- * '<S20>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation'
- * '<S21>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize'
- * '<S22>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input'
- * '<S23>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem'
- * '<S24>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem1'
- * '<S25>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem2'
- * '<S26>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus'
- * '<S27>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus/Quaternion Norm'
- * '<S28>'  : 'hoffmansubsystem/yaw2quat/Rotation Angles to Quaternions'
+ * '<S11>'  : 'hoffmansubsystem/Hoffmann Controller1/calculate delta'
+ * '<S12>'  : 'hoffmansubsystem/Hoffmann Controller1/calculate e'
+ * '<S13>'  : 'hoffmansubsystem/Select desired path/circle centered'
+ * '<S14>'  : 'hoffmansubsystem/Select desired path/straight line'
+ * '<S15>'  : 'hoffmansubsystem/Subscribe3/Enabled Subsystem'
+ * '<S16>'  : 'hoffmansubsystem/Velocity from control block /Enabled Subsystem'
+ * '<S17>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles'
+ * '<S18>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation'
+ * '<S19>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize'
+ * '<S20>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input'
+ * '<S21>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem'
+ * '<S22>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem1'
+ * '<S23>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem2'
+ * '<S24>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus'
+ * '<S25>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus/Quaternion Norm'
+ * '<S26>'  : 'hoffmansubsystem/yaw2quat/Rotation Angles to Quaternions'
  */
 #endif                                 /* RTW_HEADER_hoffmansubsystem_h_ */

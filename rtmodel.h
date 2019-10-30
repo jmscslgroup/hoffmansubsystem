@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.493
+ * Model version              : 1.503
  * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
- * C++ source code generated on : Sat Sep 21 15:34:00 2019
+ * C++ source code generated on : Mon Oct 28 21:42:10 2019
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,7 +23,7 @@
  * Code generation for Simulink model "hoffmansubsystem".
  *
  * Simulink Coder version                : 9.1 (R2019a) 23-Nov-2018
- * C++ source code generated on : Sat Sep 21 15:34:00 2019
+ * C++ source code generated on : Mon Oct 28 21:42:10 2019
  *
  * Note that the generated code is not dependent on this header file.
  * The file is used in cojuction with the automatic build procedure.
