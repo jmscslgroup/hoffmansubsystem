@@ -9,11 +9,14 @@ SimulinkSubscriber<nav_msgs::Odometry, SL_Bus_hoffmansubsystem_nav_msgs_Odometry
 // For Block hoffmansubsystem/Velocity from control block 
 SimulinkSubscriber<geometry_msgs::Twist, SL_Bus_hoffmansubsystem_geometry_msgs_Twist> Sub_hoffmansubsystem_150;
 
-// For Block hoffmansubsystem/Publish for follower vel
+// For Block hoffmansubsystem/Subsystem/Publish for follower vel
 SimulinkPublisher<geometry_msgs::Twist, SL_Bus_hoffmansubsystem_geometry_msgs_Twist> Pub_hoffmansubsystem_21;
 
-// For Block hoffmansubsystem/Publish1
+// For Block hoffmansubsystem/Subsystem/Publish1
 SimulinkPublisher<visualization_msgs::InteractiveMarkerPose, SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9> Pub_hoffmansubsystem_88;
+
+// For Block hoffmansubsystem/Get Parameter7
+SimulinkParameterGetter<boolean_T, bool> ParamGet_hoffmansubsystem_372;
 
 // For Block hoffmansubsystem/Select desired path/Get Parameter1
 SimulinkParameterGetter<real64_T, double> ParamGet_hoffmansubsystem_351;

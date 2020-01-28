@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.503
+ * Model version              : 1.506
  * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
- * C++ source code generated on : Mon Oct 28 21:42:10 2019
+ * C++ source code generated on : Wed Oct 30 12:47:55 2019
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -153,17 +153,6 @@ typedef struct {
 
 #endif
 
-#ifndef typedef_robotics_slros_internal_block_T
-#define typedef_robotics_slros_internal_block_T
-
-typedef struct {
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-} robotics_slros_internal_block_T;
-
-#endif                               /*typedef_robotics_slros_internal_block_T*/
-
 #ifndef typedef_d_robotics_slcore_internal_bl_T
 #define typedef_d_robotics_slcore_internal_bl_T
 
@@ -173,8 +162,8 @@ typedef struct {
 
 #endif                               /*typedef_d_robotics_slcore_internal_bl_T*/
 
-#ifndef typedef_robotics_slros_internal_blo_p_T
-#define typedef_robotics_slros_internal_blo_p_T
+#ifndef typedef_robotics_slros_internal_block_T
+#define typedef_robotics_slros_internal_block_T
 
 typedef struct {
   boolean_T matlabCodegenIsDeleted;
@@ -182,6 +171,17 @@ typedef struct {
   boolean_T isSetupComplete;
   real_T ticksUntilNextHit;
   d_robotics_slcore_internal_bl_T SampleTimeHandler;
+} robotics_slros_internal_block_T;
+
+#endif                               /*typedef_robotics_slros_internal_block_T*/
+
+#ifndef typedef_robotics_slros_internal_blo_p_T
+#define typedef_robotics_slros_internal_blo_p_T
+
+typedef struct {
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
 } robotics_slros_internal_blo_p_T;
 
 #endif                               /*typedef_robotics_slros_internal_blo_p_T*/

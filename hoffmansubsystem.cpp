@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.503
+ * Model version              : 1.506
  * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
- * C++ source code generated on : Mon Oct 28 21:42:10 2019
+ * C++ source code generated on : Wed Oct 30 12:47:55 2019
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -34,11 +34,11 @@ RT_MODEL_hoffmansubsystem_T *const hoffmansubsystem_M = &hoffmansubsystem_M_;
 /* Forward declaration for local functions */
 static void hoffmansubsystem_exp(creal_T x[3001]);
 static void hoffmansubsystem_linspace(real_T d1, real_T d2, real_T y[3001]);
-static void matlabCodegenHandle_matlabC_pxo(robotics_slros_internal_bl_px_T *obj);
 static void matlabCodegenHandle_matlabCo_px(robotics_slros_internal_blo_p_T *obj);
 static void matlabCodegenHandle_matlabCodeg(robotics_slros_internal_block_T *obj);
+static void matlabCodegenHandle_matlabC_pxo(robotics_slros_internal_bl_px_T *obj);
 
-/* Function for MATLAB Function: '<S6>/circle centered' */
+/* Function for MATLAB Function: '<S4>/circle centered' */
 static void hoffmansubsystem_exp(creal_T x[3001])
 {
   int16_T k;
@@ -62,7 +62,7 @@ static void hoffmansubsystem_exp(creal_T x[3001])
   }
 }
 
-/* Function for MATLAB Function: '<S6>/straight line' */
+/* Function for MATLAB Function: '<S4>/straight line' */
 static void hoffmansubsystem_linspace(real_T d1, real_T d2, real_T y[3001])
 {
   real_T delta1;
@@ -122,13 +122,6 @@ real_T rt_atan2d_snf(real_T u0, real_T u1)
   return y;
 }
 
-static void matlabCodegenHandle_matlabC_pxo(robotics_slros_internal_bl_px_T *obj)
-{
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-  }
-}
-
 static void matlabCodegenHandle_matlabCo_px(robotics_slros_internal_blo_p_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
@@ -137,6 +130,13 @@ static void matlabCodegenHandle_matlabCo_px(robotics_slros_internal_blo_p_T *obj
 }
 
 static void matlabCodegenHandle_matlabCodeg(robotics_slros_internal_block_T *obj)
+{
+  if (!obj->matlabCodegenIsDeleted) {
+    obj->matlabCodegenIsDeleted = true;
+  }
+}
+
+static void matlabCodegenHandle_matlabC_pxo(robotics_slros_internal_bl_px_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
@@ -2098,30 +2098,30 @@ void hoffmansubsystem_step(void)
   real_T tmp_0;
 
   /* Outputs for Atomic SubSystem: '<Root>/Subscribe3' */
-  /* MATLABSystem: '<S7>/SourceBlock' incorporates:
-   *  Inport: '<S15>/In1'
+  /* MATLABSystem: '<S5>/SourceBlock' incorporates:
+   *  Inport: '<S14>/In1'
    */
   b_varargout_1 = Sub_hoffmansubsystem_102.getLatestMessage
     (&hoffmansubsystem_B.b_varargout_2);
 
-  /* Outputs for Enabled SubSystem: '<S7>/Enabled Subsystem' incorporates:
-   *  EnablePort: '<S15>/Enable'
+  /* Outputs for Enabled SubSystem: '<S5>/Enabled Subsystem' incorporates:
+   *  EnablePort: '<S14>/Enable'
    */
   if (b_varargout_1) {
     hoffmansubsystem_B.In1 = hoffmansubsystem_B.b_varargout_2;
   }
 
-  /* End of MATLABSystem: '<S7>/SourceBlock' */
-  /* End of Outputs for SubSystem: '<S7>/Enabled Subsystem' */
+  /* End of MATLABSystem: '<S5>/SourceBlock' */
+  /* End of Outputs for SubSystem: '<S5>/Enabled Subsystem' */
   /* End of Outputs for SubSystem: '<Root>/Subscribe3' */
 
-  /* MATLABSystem: '<S6>/Get Parameter1' */
+  /* MATLABSystem: '<S4>/Get Parameter1' */
   ParamGet_hoffmansubsystem_351.get_parameter(&hoffmansubsystem_B.Product3);
 
-  /* MATLAB Function: '<S6>/circle centered' */
-  /* MATLAB Function 'Select desired path/circle centered': '<S13>:1' */
-  /* '<S13>:1:3' angles=linspace(-pi,pi,3001); */
-  /* '<S13>:1:4' r = radius*exp(angles*1j); */
+  /* MATLAB Function: '<S4>/circle centered' */
+  /* MATLAB Function 'Select desired path/circle centered': '<S12>:1' */
+  /* '<S12>:1:3' angles=linspace(-pi,pi,3001); */
+  /* '<S12>:1:4' r = radius*exp(angles*1j); */
   for (i = 0; i < 3001; i++) {
     hoffmansubsystem_B.r[i].re = -0.0;
     hoffmansubsystem_B.r[i].im = b[i];
@@ -2129,27 +2129,27 @@ void hoffmansubsystem_step(void)
 
   hoffmansubsystem_exp(hoffmansubsystem_B.r);
 
-  /* MATLAB Function: '<S6>/straight line' incorporates:
-   *  Constant: '<S6>/heading'
-   *  Constant: '<S6>/len'
+  /* MATLAB Function: '<S4>/straight line' incorporates:
+   *  Constant: '<S4>/heading'
+   *  Constant: '<S4>/len'
    */
-  /* '<S13>:1:5' xs = real(r)-radius+start(1); */
-  /* '<S13>:1:6' ys = imag(r)+start(2); */
-  /* '<S13>:1:7' phis=(pi/2)+angles; */
-  /* MATLAB Function 'Select desired path/straight line': '<S14>:1' */
-  /* '<S14>:1:3' r = linspace(0,len,3001); */
+  /* '<S12>:1:5' xs = real(r)-radius+start(1); */
+  /* '<S12>:1:6' ys = imag(r)+start(2); */
+  /* '<S12>:1:7' phis=(pi/2)+angles; */
+  /* MATLAB Function 'Select desired path/straight line': '<S13>:1' */
+  /* '<S13>:1:3' r = linspace(0,len,3001); */
   hoffmansubsystem_linspace(0.0, hoffmansubsystem_P.len_Value,
     hoffmansubsystem_B.ys);
 
-  /* '<S14>:1:4' xs = r*cos(heading); */
+  /* '<S13>:1:4' xs = r*cos(heading); */
   hoffmansubsystem_B.etmp = cos(hoffmansubsystem_P.heading_Value);
   for (i = 0; i < 3001; i++) {
-    /* MATLAB Function: '<S6>/straight line' */
+    /* MATLAB Function: '<S4>/straight line' */
     hoffmansubsystem_B.xs[i] = hoffmansubsystem_B.ys[i] *
       hoffmansubsystem_B.etmp;
 
-    /* MATLAB Function: '<S6>/circle centered' incorporates:
-     *  MATLABSystem: '<S6>/Get Parameter1'
+    /* MATLAB Function: '<S4>/circle centered' incorporates:
+     *  MATLABSystem: '<S4>/Get Parameter1'
      */
     hoffmansubsystem_B.r_m.re = hoffmansubsystem_B.Product3 *
       hoffmansubsystem_B.r[i].re;
@@ -2158,23 +2158,23 @@ void hoffmansubsystem_step(void)
     hoffmansubsystem_B.r[i] = hoffmansubsystem_B.r_m;
   }
 
-  /* MATLAB Function: '<S6>/straight line' incorporates:
-   *  Constant: '<S6>/heading'
+  /* MATLAB Function: '<S4>/straight line' incorporates:
+   *  Constant: '<S4>/heading'
    */
-  /* '<S14>:1:5' ys = r*sin(heading); */
+  /* '<S13>:1:5' ys = r*sin(heading); */
   hoffmansubsystem_B.etmp = sin(hoffmansubsystem_P.heading_Value);
   for (i = 0; i < 3001; i++) {
     hoffmansubsystem_B.ys[i] *= hoffmansubsystem_B.etmp;
   }
 
-  /* MultiPortSwitch: '<S6>/Multiport Switch' incorporates:
-   *  Constant: '<S6>/Constant'
-   *  Constant: '<S6>/heading'
-   *  Constant: '<S6>/pathChoice '
-   *  MATLAB Function: '<S6>/circle centered'
-   *  MATLABSystem: '<S6>/Get Parameter1'
+  /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+   *  Constant: '<S4>/Constant'
+   *  Constant: '<S4>/heading'
+   *  Constant: '<S4>/pathChoice '
+   *  MATLAB Function: '<S4>/circle centered'
+   *  MATLABSystem: '<S4>/Get Parameter1'
    */
-  /* '<S14>:1:6' phis = heading*ones(1,length(r)); */
+  /* '<S13>:1:6' phis = heading*ones(1,length(r)); */
   if (static_cast<int16_T>(hoffmansubsystem_P.pathChoice_Value) == 1) {
     for (i = 0; i < 3001; i++) {
       hoffmansubsystem_B.MultiportSwitch[i] = (hoffmansubsystem_B.r[i].re -
@@ -2192,24 +2192,24 @@ void hoffmansubsystem_step(void)
     }
   }
 
-  /* End of MultiPortSwitch: '<S6>/Multiport Switch' */
+  /* End of MultiPortSwitch: '<S4>/Multiport Switch' */
 
   /* MATLAB Function: '<S3>/calculate e' */
-  /* MATLAB Function 'Hoffmann Controller1/calculate e': '<S12>:1' */
-  /* '<S12>:1:3' path=reshape(pathV,[],3); */
-  /* '<S12>:1:4' x1 = path(1,1); */
-  /* '<S12>:1:5' y1 = path(1,2); */
-  /* '<S12>:1:6' phi1=path(1,3); */
-  /* '<S12>:1:7' etmp = inf; */
-  /* '<S12>:1:8' e = inf; */
+  /* MATLAB Function 'Hoffmann Controller1/calculate e': '<S11>:1' */
+  /* '<S11>:1:3' path=reshape(pathV,[],3); */
+  /* '<S11>:1:4' x1 = path(1,1); */
+  /* '<S11>:1:5' y1 = path(1,2); */
+  /* '<S11>:1:6' phi1=path(1,3); */
+  /* '<S11>:1:7' etmp = inf; */
+  /* '<S11>:1:8' e = inf; */
   hoffmansubsystem_B.Product3 = (rtInf);
 
-  /* '<S12>:1:9' index=1; */
+  /* '<S11>:1:9' index=1; */
   b_index = 0;
 
-  /* '<S12>:1:11' for i=1:length(path) */
+  /* '<S11>:1:11' for i=1:length(path) */
   for (i = 0; i < 3001; i++) {
-    /* '<S12>:1:12' etmp = sqrt((x-path(i,1))^2+(y-path(i,2))^2); */
+    /* '<S11>:1:12' etmp = sqrt((x-path(i,1))^2+(y-path(i,2))^2); */
     hoffmansubsystem_B.etmp = hoffmansubsystem_B.In1.Pose.Pose.Position.X -
       hoffmansubsystem_B.MultiportSwitch[i];
     hoffmansubsystem_B.q0 = hoffmansubsystem_B.In1.Pose.Pose.Position.Y -
@@ -2217,25 +2217,25 @@ void hoffmansubsystem_step(void)
     hoffmansubsystem_B.etmp = sqrt(hoffmansubsystem_B.etmp *
       hoffmansubsystem_B.etmp + hoffmansubsystem_B.q0 * hoffmansubsystem_B.q0);
 
-    /* '<S12>:1:13' if( etmp < e ) */
+    /* '<S11>:1:13' if( etmp < e ) */
     if (hoffmansubsystem_B.etmp < hoffmansubsystem_B.Product3) {
-      /* '<S12>:1:14' e = etmp; */
+      /* '<S11>:1:14' e = etmp; */
       hoffmansubsystem_B.Product3 = hoffmansubsystem_B.etmp;
 
-      /* '<S12>:1:15' index=i; */
+      /* '<S11>:1:15' index=i; */
       b_index = i;
     }
   }
 
-  /* '<S12>:1:19' xpathOut=path(index,1); */
-  /* '<S12>:1:20' ypathOut=path(index,2); */
-  /* '<S12>:1:21' phipath=path(index,3); */
-  /* '<S12>:1:23' ex1 = (path(index,1)-x); */
-  /* '<S12>:1:24' ey1 = (path(index,2)-y); */
-  /* '<S12>:1:25' ex2 = cos(phipath); */
-  /* '<S12>:1:26' ey2 = sin(phipath); */
-  /* '<S12>:1:27' sinnnn = ex1*ey2-ey1*ex2; */
-  /* '<S12>:1:28' e = sign(sinnnn)*e; */
+  /* '<S11>:1:19' xpathOut=path(index,1); */
+  /* '<S11>:1:20' ypathOut=path(index,2); */
+  /* '<S11>:1:21' phipath=path(index,3); */
+  /* '<S11>:1:23' ex1 = (path(index,1)-x); */
+  /* '<S11>:1:24' ey1 = (path(index,2)-y); */
+  /* '<S11>:1:25' ex2 = cos(phipath); */
+  /* '<S11>:1:26' ey2 = sin(phipath); */
+  /* '<S11>:1:27' sinnnn = ex1*ey2-ey1*ex2; */
+  /* '<S11>:1:28' e = sign(sinnnn)*e; */
   hoffmansubsystem_B.rtb_sincos_o2_idx_0 = hoffmansubsystem_B.MultiportSwitch
     [6002 + b_index];
   u_tmp = hoffmansubsystem_B.MultiportSwitch[3001 + b_index];
@@ -2257,29 +2257,29 @@ void hoffmansubsystem_step(void)
   rtb_e = hoffmansubsystem_B.etmp * hoffmansubsystem_B.Product3;
 
   /* Outputs for Atomic SubSystem: '<Root>/Velocity from control block ' */
-  /* MATLABSystem: '<S8>/SourceBlock' incorporates:
-   *  Inport: '<S16>/In1'
+  /* MATLABSystem: '<S7>/SourceBlock' incorporates:
+   *  Inport: '<S17>/In1'
    */
   b_varargout_1 = Sub_hoffmansubsystem_150.getLatestMessage
     (&hoffmansubsystem_B.BusAssignment1);
 
-  /* Outputs for Enabled SubSystem: '<S8>/Enabled Subsystem' incorporates:
-   *  EnablePort: '<S16>/Enable'
+  /* Outputs for Enabled SubSystem: '<S7>/Enabled Subsystem' incorporates:
+   *  EnablePort: '<S17>/Enable'
    */
   if (b_varargout_1) {
     hoffmansubsystem_B.In1_k = hoffmansubsystem_B.BusAssignment1;
   }
 
-  /* End of MATLABSystem: '<S8>/SourceBlock' */
-  /* End of Outputs for SubSystem: '<S8>/Enabled Subsystem' */
+  /* End of MATLABSystem: '<S7>/SourceBlock' */
+  /* End of Outputs for SubSystem: '<S7>/Enabled Subsystem' */
   /* End of Outputs for SubSystem: '<Root>/Velocity from control block ' */
 
-  /* Sqrt: '<S24>/sqrt' incorporates:
-   *  Product: '<S25>/Product'
-   *  Product: '<S25>/Product1'
-   *  Product: '<S25>/Product2'
-   *  Product: '<S25>/Product3'
-   *  Sum: '<S25>/Sum'
+  /* Sqrt: '<S25>/sqrt' incorporates:
+   *  Product: '<S26>/Product'
+   *  Product: '<S26>/Product1'
+   *  Product: '<S26>/Product2'
+   *  Product: '<S26>/Product3'
+   *  Sum: '<S26>/Sum'
    */
   hoffmansubsystem_B.Product3 = sqrt
     (((hoffmansubsystem_B.In1.Pose.Pose.Orientation.W *
@@ -2291,26 +2291,26 @@ void hoffmansubsystem_step(void)
      hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z *
      hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z);
 
-  /* Product: '<S19>/Product' */
+  /* Product: '<S20>/Product' */
   hoffmansubsystem_B.etmp = hoffmansubsystem_B.In1.Pose.Pose.Orientation.W /
     hoffmansubsystem_B.Product3;
 
-  /* Product: '<S19>/Product1' */
+  /* Product: '<S20>/Product1' */
   hoffmansubsystem_B.q0 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.X /
     hoffmansubsystem_B.Product3;
 
-  /* Product: '<S19>/Product2' */
+  /* Product: '<S20>/Product2' */
   hoffmansubsystem_B.Product2 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.Y /
     hoffmansubsystem_B.Product3;
 
-  /* Product: '<S19>/Product3' */
+  /* Product: '<S20>/Product3' */
   hoffmansubsystem_B.Product3 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z /
     hoffmansubsystem_B.Product3;
 
   /* Sum: '<S3>/Sum' incorporates:
-   *  Fcn: '<S17>/fcn1'
-   *  Fcn: '<S17>/fcn2'
-   *  Trigonometry: '<S18>/Trigonometric Function1'
+   *  Fcn: '<S18>/fcn1'
+   *  Fcn: '<S18>/fcn2'
+   *  Trigonometry: '<S19>/Trigonometric Function1'
    */
   rtb_Sum = rt_atan2d_snf((hoffmansubsystem_B.q0 * hoffmansubsystem_B.Product2 +
     hoffmansubsystem_B.etmp * hoffmansubsystem_B.Product3) * 2.0,
@@ -2323,21 +2323,21 @@ void hoffmansubsystem_step(void)
   hoffmansubsystem_B.Product3 = hoffmansubsystem_B.In1_k.Linear.X;
   hoffmansubsystem_B.etmp = rtb_Sum;
 
-  /* MATLAB Function 'Hoffmann Controller1/calculate delta': '<S11>:1' */
-  /* '<S11>:1:3' if( abs(v) < eps ) */
+  /* MATLAB Function 'Hoffmann Controller1/calculate delta': '<S10>:1' */
+  /* '<S10>:1:3' if( abs(v) < eps ) */
   if (fabs(hoffmansubsystem_B.In1_k.Linear.X) < 2.2204460492503131E-16) {
-    /* '<S11>:1:4' v = eps; */
+    /* '<S10>:1:4' v = eps; */
     hoffmansubsystem_B.Product3 = 2.2204460492503131E-16;
   }
 
-  /* '<S11>:1:9' if( phi < -pi ) */
+  /* '<S10>:1:9' if( phi < -pi ) */
   if (rtb_Sum < -3.1415926535897931) {
-    /* '<S11>:1:10' phi = phi+2*pi; */
+    /* '<S10>:1:10' phi = phi+2*pi; */
     hoffmansubsystem_B.etmp = rtb_Sum + 6.2831853071795862;
   } else {
     if (rtb_Sum > 3.1415926535897931) {
-      /* '<S11>:1:11' elseif( phi > pi ) */
-      /* '<S11>:1:12' phi = phi-2*pi; */
+      /* '<S10>:1:11' elseif( phi > pi ) */
+      /* '<S10>:1:12' phi = phi-2*pi; */
       hoffmansubsystem_B.etmp = rtb_Sum - 6.2831853071795862;
     }
   }
@@ -2345,7 +2345,7 @@ void hoffmansubsystem_step(void)
   /* BusAssignment: '<Root>/Bus Assignment1' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  /* '<S11>:1:15' delta = phi + atan2(k*e,v); */
+  /* '<S10>:1:15' delta = phi + atan2(k*e,v); */
   hoffmansubsystem_B.BusAssignment1 = hoffmansubsystem_P.Constant_Value_l;
 
   /* Switch: '<S3>/Switch' */
@@ -2371,22 +2371,16 @@ void hoffmansubsystem_step(void)
     (hoffmansubsystem_P.k_Value * rtb_e, hoffmansubsystem_B.Product3) +
     hoffmansubsystem_B.etmp) * hoffmansubsystem_P.Gain_Gain;
 
-  /* Outputs for Atomic SubSystem: '<Root>/Publish for follower vel' */
-  /* MATLABSystem: '<S4>/SinkBlock' */
-  Pub_hoffmansubsystem_21.publish(&hoffmansubsystem_B.BusAssignment1);
-
-  /* End of Outputs for SubSystem: '<Root>/Publish for follower vel' */
-
-  /* Gain: '<S26>/1//2' incorporates:
-   *  Constant: '<S10>/Constant'
+  /* Gain: '<S27>/1//2' incorporates:
+   *  Constant: '<S9>/Constant'
    */
   hoffmansubsystem_B.Product2 = hoffmansubsystem_B.rtb_sincos_o2_idx_0 *
     hoffmansubsystem_P.u2_Gain;
   hoffmansubsystem_B.q0 = hoffmansubsystem_P.u2_Gain *
     hoffmansubsystem_P.Constant_Value_bw;
 
-  /* Trigonometry: '<S26>/sincos' incorporates:
-   *  Gain: '<S26>/1//2'
+  /* Trigonometry: '<S27>/sincos' incorporates:
+   *  Gain: '<S27>/1//2'
    */
   hoffmansubsystem_B.rtb_sincos_o2_idx_0 = cos(hoffmansubsystem_B.Product2);
   hoffmansubsystem_B.Product2 = sin(hoffmansubsystem_B.Product2);
@@ -2404,28 +2398,28 @@ void hoffmansubsystem_step(void)
     hoffmansubsystem_B.MultiportSwitch[b_index];
   hoffmansubsystem_B.BusAssignment2.Pose.Position.Y = u_tmp;
 
-  /* Fcn: '<S26>/q1' incorporates:
-   *  Fcn: '<S26>/q0'
+  /* Fcn: '<S27>/q1' incorporates:
+   *  Fcn: '<S27>/q0'
    */
   u_tmp = hoffmansubsystem_B.rtb_sincos_o2_idx_0 * rtb_sincos_o2_idx_1;
   tmp_0 = hoffmansubsystem_B.Product2 * hoffmansubsystem_B.etmp;
 
   /* BusAssignment: '<Root>/Bus Assignment2' incorporates:
-   *  Fcn: '<S26>/q1'
+   *  Fcn: '<S27>/q1'
    */
   hoffmansubsystem_B.BusAssignment2.Pose.Orientation.X = u_tmp *
     hoffmansubsystem_B.q0 - tmp_0 * hoffmansubsystem_B.Product3;
 
-  /* Fcn: '<S26>/q2' incorporates:
-   *  Fcn: '<S26>/q3'
+  /* Fcn: '<S27>/q2' incorporates:
+   *  Fcn: '<S27>/q3'
    */
   hoffmansubsystem_B.Product2 *= rtb_sincos_o2_idx_1;
   hoffmansubsystem_B.rtb_sincos_o2_idx_0 *= hoffmansubsystem_B.etmp;
 
   /* BusAssignment: '<Root>/Bus Assignment2' incorporates:
-   *  Fcn: '<S26>/q0'
-   *  Fcn: '<S26>/q2'
-   *  Fcn: '<S26>/q3'
+   *  Fcn: '<S27>/q0'
+   *  Fcn: '<S27>/q2'
+   *  Fcn: '<S27>/q3'
    */
   hoffmansubsystem_B.BusAssignment2.Pose.Orientation.Y =
     hoffmansubsystem_B.rtb_sincos_o2_idx_0 * hoffmansubsystem_B.Product3 +
@@ -2436,11 +2430,28 @@ void hoffmansubsystem_step(void)
   hoffmansubsystem_B.BusAssignment2.Pose.Orientation.W = u_tmp *
     hoffmansubsystem_B.Product3 + tmp_0 * hoffmansubsystem_B.q0;
 
-  /* Outputs for Atomic SubSystem: '<Root>/Publish1' */
-  /* MATLABSystem: '<S5>/SinkBlock' */
-  Pub_hoffmansubsystem_88.publish(&hoffmansubsystem_B.BusAssignment2);
+  /* MATLABSystem: '<Root>/Get Parameter7' */
+  ParamGet_hoffmansubsystem_372.get_parameter(&b_varargout_1);
 
-  /* End of Outputs for SubSystem: '<Root>/Publish1' */
+  /* Outputs for Enabled SubSystem: '<Root>/Subsystem' incorporates:
+   *  EnablePort: '<S6>/Enable'
+   */
+  if (b_varargout_1) {
+    /* Outputs for Atomic SubSystem: '<S6>/Publish for follower vel' */
+    /* MATLABSystem: '<S15>/SinkBlock' */
+    Pub_hoffmansubsystem_21.publish(&hoffmansubsystem_B.BusAssignment1);
+
+    /* End of Outputs for SubSystem: '<S6>/Publish for follower vel' */
+
+    /* Outputs for Atomic SubSystem: '<S6>/Publish1' */
+    /* MATLABSystem: '<S16>/SinkBlock' */
+    Pub_hoffmansubsystem_88.publish(&hoffmansubsystem_B.BusAssignment2);
+
+    /* End of Outputs for SubSystem: '<S6>/Publish1' */
+  }
+
+  /* End of MATLABSystem: '<Root>/Get Parameter7' */
+  /* End of Outputs for SubSystem: '<Root>/Subsystem' */
 }
 
 /* Model initialize function */
@@ -2467,37 +2478,41 @@ void hoffmansubsystem_initialize(void)
 
     static const char_T tmp_0[7] = { 'c', 'm', 'd', '_', 'v', 'e', 'l' };
 
-    static const char_T tmp_1[15] = { 'c', 'm', 'd', '_', 'c', 'o', 'n', 't',
+    static const char_T tmp_1[27] = { '/', 't', 'i', 'm', 'e', 'r', '_', 'c',
+      'o', 'm', 'p', 'a', 'n', 'i', 'o', 'n', '/', 'd', 'o', '_', 'p', 'u', 'b',
+      'l', 'i', 's', 'h' };
+
+    static const char_T tmp_2[15] = { 'c', 'm', 'd', '_', 'c', 'o', 'n', 't',
       'r', 'o', 'l', '_', 'v', 'e', 'l' };
 
-    static const char_T tmp_2[6] = { 'r', 'a', 'd', 'i', 'u', 's' };
+    static const char_T tmp_3[6] = { 'r', 'a', 'd', 'i', 'u', 's' };
 
-    char_T tmp_3[9];
-    char_T tmp_4[8];
-    char_T tmp_5[16];
-    char_T tmp_6[7];
-    char_T tmp_7[5];
+    char_T tmp_4[9];
+    char_T tmp_5[8];
+    char_T tmp_6[16];
+    char_T tmp_7[7];
+    char_T tmp_8[5];
     int16_T i;
 
     /* Start for Atomic SubSystem: '<Root>/Subscribe3' */
-    /* Start for MATLABSystem: '<S7>/SourceBlock' */
+    /* Start for MATLABSystem: '<S5>/SourceBlock' */
     hoffmansubsystem_DW.obj_i.matlabCodegenIsDeleted = true;
     hoffmansubsystem_DW.obj_i.isInitialized = 0L;
     hoffmansubsystem_DW.obj_i.matlabCodegenIsDeleted = false;
     hoffmansubsystem_DW.objisempty_c = true;
     hoffmansubsystem_DW.obj_i.isSetupComplete = false;
     hoffmansubsystem_DW.obj_i.isInitialized = 1L;
-    tmp_7[0] = 'o';
-    tmp_7[1] = 'd';
-    tmp_7[2] = 'o';
-    tmp_7[3] = 'm';
-    tmp_7[4] = '\x00';
-    Sub_hoffmansubsystem_102.createSubscriber(tmp_7, 1L);
+    tmp_8[0] = 'o';
+    tmp_8[1] = 'd';
+    tmp_8[2] = 'o';
+    tmp_8[3] = 'm';
+    tmp_8[4] = '\x00';
+    Sub_hoffmansubsystem_102.createSubscriber(tmp_8, 1L);
     hoffmansubsystem_DW.obj_i.isSetupComplete = true;
 
     /* End of Start for SubSystem: '<Root>/Subscribe3' */
 
-    /* Start for MATLABSystem: '<S6>/Get Parameter1' */
+    /* Start for MATLABSystem: '<S4>/Get Parameter1' */
     hoffmansubsystem_DW.obj.matlabCodegenIsDeleted = true;
     hoffmansubsystem_DW.obj.isInitialized = 0L;
     hoffmansubsystem_DW.obj.ticksUntilNextHit = 0.0;
@@ -2506,38 +2521,59 @@ void hoffmansubsystem_initialize(void)
     hoffmansubsystem_DW.obj.isSetupComplete = false;
     hoffmansubsystem_DW.obj.isInitialized = 1L;
     for (i = 0; i < 6; i++) {
-      tmp_6[i] = tmp_2[i];
+      tmp_7[i] = tmp_3[i];
     }
 
-    tmp_6[6] = '\x00';
-    ParamGet_hoffmansubsystem_351.initialize(tmp_6);
+    tmp_7[6] = '\x00';
+    ParamGet_hoffmansubsystem_351.initialize(tmp_7);
     ParamGet_hoffmansubsystem_351.initialize_error_codes(0, 1, 2, 3);
     ParamGet_hoffmansubsystem_351.set_initial_value(41.3803);
     hoffmansubsystem_DW.obj.isSetupComplete = true;
 
-    /* End of Start for MATLABSystem: '<S6>/Get Parameter1' */
+    /* End of Start for MATLABSystem: '<S4>/Get Parameter1' */
 
     /* Start for Atomic SubSystem: '<Root>/Velocity from control block ' */
-    /* Start for MATLABSystem: '<S8>/SourceBlock' */
-    hoffmansubsystem_DW.obj_pa.matlabCodegenIsDeleted = true;
-    hoffmansubsystem_DW.obj_pa.isInitialized = 0L;
-    hoffmansubsystem_DW.obj_pa.matlabCodegenIsDeleted = false;
+    /* Start for MATLABSystem: '<S7>/SourceBlock' */
+    hoffmansubsystem_DW.obj_p.matlabCodegenIsDeleted = true;
+    hoffmansubsystem_DW.obj_p.isInitialized = 0L;
+    hoffmansubsystem_DW.obj_p.matlabCodegenIsDeleted = false;
     hoffmansubsystem_DW.objisempty = true;
-    hoffmansubsystem_DW.obj_pa.isSetupComplete = false;
-    hoffmansubsystem_DW.obj_pa.isInitialized = 1L;
+    hoffmansubsystem_DW.obj_p.isSetupComplete = false;
+    hoffmansubsystem_DW.obj_p.isInitialized = 1L;
     for (i = 0; i < 15; i++) {
-      tmp_5[i] = tmp_1[i];
+      tmp_6[i] = tmp_2[i];
     }
 
-    tmp_5[15] = '\x00';
-    Sub_hoffmansubsystem_150.createSubscriber(tmp_5, 1L);
-    hoffmansubsystem_DW.obj_pa.isSetupComplete = true;
+    tmp_6[15] = '\x00';
+    Sub_hoffmansubsystem_150.createSubscriber(tmp_6, 1L);
+    hoffmansubsystem_DW.obj_p.isSetupComplete = true;
 
-    /* End of Start for MATLABSystem: '<S8>/SourceBlock' */
+    /* End of Start for MATLABSystem: '<S7>/SourceBlock' */
     /* End of Start for SubSystem: '<Root>/Velocity from control block ' */
 
-    /* Start for Atomic SubSystem: '<Root>/Publish for follower vel' */
-    /* Start for MATLABSystem: '<S4>/SinkBlock' */
+    /* Start for MATLABSystem: '<Root>/Get Parameter7' */
+    hoffmansubsystem_DW.obj_o.matlabCodegenIsDeleted = true;
+    hoffmansubsystem_DW.obj_o.isInitialized = 0L;
+    hoffmansubsystem_DW.obj_o.ticksUntilNextHit = 0.0;
+    hoffmansubsystem_DW.obj_o.matlabCodegenIsDeleted = false;
+    hoffmansubsystem_DW.objisempty_cw = true;
+    hoffmansubsystem_DW.obj_o.isSetupComplete = false;
+    hoffmansubsystem_DW.obj_o.isInitialized = 1L;
+    for (i = 0; i < 27; i++) {
+      hoffmansubsystem_B.cv0[i] = tmp_1[i];
+    }
+
+    hoffmansubsystem_B.cv0[27] = '\x00';
+    ParamGet_hoffmansubsystem_372.initialize(hoffmansubsystem_B.cv0);
+    ParamGet_hoffmansubsystem_372.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_hoffmansubsystem_372.set_initial_value(false);
+    hoffmansubsystem_DW.obj_o.isSetupComplete = true;
+
+    /* End of Start for MATLABSystem: '<Root>/Get Parameter7' */
+
+    /* Start for Enabled SubSystem: '<Root>/Subsystem' */
+    /* Start for Atomic SubSystem: '<S6>/Publish for follower vel' */
+    /* Start for MATLABSystem: '<S15>/SinkBlock' */
     hoffmansubsystem_DW.obj_m.matlabCodegenIsDeleted = true;
     hoffmansubsystem_DW.obj_m.isInitialized = 0L;
     hoffmansubsystem_DW.obj_m.matlabCodegenIsDeleted = false;
@@ -2545,50 +2581,51 @@ void hoffmansubsystem_initialize(void)
     hoffmansubsystem_DW.obj_m.isSetupComplete = false;
     hoffmansubsystem_DW.obj_m.isInitialized = 1L;
     for (i = 0; i < 7; i++) {
-      tmp_4[i] = tmp_0[i];
+      tmp_5[i] = tmp_0[i];
     }
 
-    tmp_4[7] = '\x00';
-    Pub_hoffmansubsystem_21.createPublisher(tmp_4, 1L);
+    tmp_5[7] = '\x00';
+    Pub_hoffmansubsystem_21.createPublisher(tmp_5, 1L);
     hoffmansubsystem_DW.obj_m.isSetupComplete = true;
 
-    /* End of Start for MATLABSystem: '<S4>/SinkBlock' */
-    /* End of Start for SubSystem: '<Root>/Publish for follower vel' */
+    /* End of Start for MATLABSystem: '<S15>/SinkBlock' */
+    /* End of Start for SubSystem: '<S6>/Publish for follower vel' */
 
-    /* Start for Atomic SubSystem: '<Root>/Publish1' */
-    /* Start for MATLABSystem: '<S5>/SinkBlock' */
-    hoffmansubsystem_DW.obj_p.matlabCodegenIsDeleted = true;
-    hoffmansubsystem_DW.obj_p.isInitialized = 0L;
-    hoffmansubsystem_DW.obj_p.matlabCodegenIsDeleted = false;
+    /* Start for Atomic SubSystem: '<S6>/Publish1' */
+    /* Start for MATLABSystem: '<S16>/SinkBlock' */
+    hoffmansubsystem_DW.obj_pi.matlabCodegenIsDeleted = true;
+    hoffmansubsystem_DW.obj_pi.isInitialized = 0L;
+    hoffmansubsystem_DW.obj_pi.matlabCodegenIsDeleted = false;
     hoffmansubsystem_DW.objisempty_h = true;
-    hoffmansubsystem_DW.obj_p.isSetupComplete = false;
-    hoffmansubsystem_DW.obj_p.isInitialized = 1L;
+    hoffmansubsystem_DW.obj_pi.isSetupComplete = false;
+    hoffmansubsystem_DW.obj_pi.isInitialized = 1L;
     for (i = 0; i < 8; i++) {
-      tmp_3[i] = tmp[i];
+      tmp_4[i] = tmp[i];
     }
 
-    tmp_3[8] = '\x00';
-    Pub_hoffmansubsystem_88.createPublisher(tmp_3, 1L);
-    hoffmansubsystem_DW.obj_p.isSetupComplete = true;
+    tmp_4[8] = '\x00';
+    Pub_hoffmansubsystem_88.createPublisher(tmp_4, 1L);
+    hoffmansubsystem_DW.obj_pi.isSetupComplete = true;
 
-    /* End of Start for MATLABSystem: '<S5>/SinkBlock' */
-    /* End of Start for SubSystem: '<Root>/Publish1' */
+    /* End of Start for MATLABSystem: '<S16>/SinkBlock' */
+    /* End of Start for SubSystem: '<S6>/Publish1' */
+    /* End of Start for SubSystem: '<Root>/Subsystem' */
   }
 
   /* SystemInitialize for Atomic SubSystem: '<Root>/Subscribe3' */
-  /* SystemInitialize for Enabled SubSystem: '<S7>/Enabled Subsystem' */
-  /* SystemInitialize for Outport: '<S15>/Out1' */
+  /* SystemInitialize for Enabled SubSystem: '<S5>/Enabled Subsystem' */
+  /* SystemInitialize for Outport: '<S14>/Out1' */
   hoffmansubsystem_B.In1 = hoffmansubsystem_P.Out1_Y0;
 
-  /* End of SystemInitialize for SubSystem: '<S7>/Enabled Subsystem' */
+  /* End of SystemInitialize for SubSystem: '<S5>/Enabled Subsystem' */
   /* End of SystemInitialize for SubSystem: '<Root>/Subscribe3' */
 
   /* SystemInitialize for Atomic SubSystem: '<Root>/Velocity from control block ' */
-  /* SystemInitialize for Enabled SubSystem: '<S8>/Enabled Subsystem' */
-  /* SystemInitialize for Outport: '<S16>/Out1' */
+  /* SystemInitialize for Enabled SubSystem: '<S7>/Enabled Subsystem' */
+  /* SystemInitialize for Outport: '<S17>/Out1' */
   hoffmansubsystem_B.In1_k = hoffmansubsystem_P.Out1_Y0_n;
 
-  /* End of SystemInitialize for SubSystem: '<S8>/Enabled Subsystem' */
+  /* End of SystemInitialize for SubSystem: '<S7>/Enabled Subsystem' */
   /* End of SystemInitialize for SubSystem: '<Root>/Velocity from control block ' */
 }
 
@@ -2596,29 +2633,34 @@ void hoffmansubsystem_initialize(void)
 void hoffmansubsystem_terminate(void)
 {
   /* Terminate for Atomic SubSystem: '<Root>/Subscribe3' */
-  /* Terminate for MATLABSystem: '<S7>/SourceBlock' */
-  matlabCodegenHandle_matlabC_pxo(&hoffmansubsystem_DW.obj_i);
+  /* Terminate for MATLABSystem: '<S5>/SourceBlock' */
+  matlabCodegenHandle_matlabCo_px(&hoffmansubsystem_DW.obj_i);
 
   /* End of Terminate for SubSystem: '<Root>/Subscribe3' */
 
-  /* Terminate for MATLABSystem: '<S6>/Get Parameter1' */
-  matlabCodegenHandle_matlabCo_px(&hoffmansubsystem_DW.obj);
+  /* Terminate for MATLABSystem: '<S4>/Get Parameter1' */
+  matlabCodegenHandle_matlabCodeg(&hoffmansubsystem_DW.obj);
 
   /* Terminate for Atomic SubSystem: '<Root>/Velocity from control block ' */
-  /* Terminate for MATLABSystem: '<S8>/SourceBlock' */
-  matlabCodegenHandle_matlabC_pxo(&hoffmansubsystem_DW.obj_pa);
+  /* Terminate for MATLABSystem: '<S7>/SourceBlock' */
+  matlabCodegenHandle_matlabCo_px(&hoffmansubsystem_DW.obj_p);
 
   /* End of Terminate for SubSystem: '<Root>/Velocity from control block ' */
 
-  /* Terminate for Atomic SubSystem: '<Root>/Publish for follower vel' */
-  /* Terminate for MATLABSystem: '<S4>/SinkBlock' */
-  matlabCodegenHandle_matlabCodeg(&hoffmansubsystem_DW.obj_m);
+  /* Terminate for MATLABSystem: '<Root>/Get Parameter7' */
+  matlabCodegenHandle_matlabCodeg(&hoffmansubsystem_DW.obj_o);
 
-  /* End of Terminate for SubSystem: '<Root>/Publish for follower vel' */
+  /* Terminate for Enabled SubSystem: '<Root>/Subsystem' */
+  /* Terminate for Atomic SubSystem: '<S6>/Publish for follower vel' */
+  /* Terminate for MATLABSystem: '<S15>/SinkBlock' */
+  matlabCodegenHandle_matlabC_pxo(&hoffmansubsystem_DW.obj_m);
 
-  /* Terminate for Atomic SubSystem: '<Root>/Publish1' */
-  /* Terminate for MATLABSystem: '<S5>/SinkBlock' */
-  matlabCodegenHandle_matlabCodeg(&hoffmansubsystem_DW.obj_p);
+  /* End of Terminate for SubSystem: '<S6>/Publish for follower vel' */
 
-  /* End of Terminate for SubSystem: '<Root>/Publish1' */
+  /* Terminate for Atomic SubSystem: '<S6>/Publish1' */
+  /* Terminate for MATLABSystem: '<S16>/SinkBlock' */
+  matlabCodegenHandle_matlabC_pxo(&hoffmansubsystem_DW.obj_pi);
+
+  /* End of Terminate for SubSystem: '<S6>/Publish1' */
+  /* End of Terminate for SubSystem: '<Root>/Subsystem' */
 }
