@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.506
- * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
- * C++ source code generated on : Wed Oct 30 12:47:55 2019
+ * Model version              : 1.521
+ * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
+ * C++ source code generated on : Thu Aug 27 16:54:53 2020
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -21,8 +21,8 @@
 #ifndef RTW_HEADER_hoffmansubsystem_h_
 #define RTW_HEADER_hoffmansubsystem_h_
 #include <math.h>
-#include <stddef.h>
 #include <string.h>
+#include <stddef.h>
 #ifndef hoffmansubsystem_COMMON_INCLUDES_
 # define hoffmansubsystem_COMMON_INCLUDES_
 #include "rtwtypes.h"
@@ -51,48 +51,41 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T MultiportSwitch[9003];        /* '<S4>/Multiport Switch' */
-  creal_T r[3001];
-  real_T ys[3001];                     /* '<S4>/straight line' */
-  real_T xs[3001];                     /* '<S4>/straight line' */
-  SL_Bus_hoffmansubsystem_nav_msgs_Odometry In1;/* '<S14>/In1' */
+  real_T TmpSignalConversionAtSFunct[30000];/* '<S3>/calculate e' */
+  real_T ys[10000];                    /* '<S4>/straight line' */
+  real_T xs[10000];                    /* '<S4>/straight line' */
+  SL_Bus_hoffmansubsystem_nav_msgs_Odometry In1;/* '<S13>/In1' */
   SL_Bus_hoffmansubsystem_nav_msgs_Odometry b_varargout_2;
   SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9 BusAssignment2;/* '<Root>/Bus Assignment2' */
-  SL_Bus_hoffmansubsystem_geometry_msgs_Twist In1_k;/* '<S17>/In1' */
+  SL_Bus_hoffmansubsystem_geometry_msgs_Twist In1_k;/* '<S16>/In1' */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist BusAssignment1;/* '<Root>/Bus Assignment1' */
-  char_T cv0[28];
-  creal_T r_m;
   real_T etmp;
-  real_T Product3;                     /* '<S20>/Product3' */
-  real_T Product2;                     /* '<S20>/Product2' */
-  real_T q0;                           /* '<S27>/q0' */
-  real_T rtb_sincos_o2_idx_0;
+  real_T Product3;                     /* '<S19>/Product3' */
+  real_T Product2;                     /* '<S19>/Product2' */
+  real_T q0;                           /* '<S26>/q0' */
+  real_T rtb_ys_m;
 } B_hoffmansubsystem_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  robotics_slros_internal_block_T obj; /* '<S4>/Get Parameter1' */
-  robotics_slros_internal_block_T obj_o;/* '<Root>/Get Parameter7' */
-  robotics_slros_internal_blo_p_T obj_p;/* '<S7>/SourceBlock' */
-  robotics_slros_internal_blo_p_T obj_i;/* '<S5>/SourceBlock' */
-  robotics_slros_internal_bl_px_T obj_pi;/* '<S16>/SinkBlock' */
-  robotics_slros_internal_bl_px_T obj_m;/* '<S15>/SinkBlock' */
+  ros_slros_internal_block_Subs_T obj; /* '<S7>/SourceBlock' */
+  ros_slros_internal_block_Subs_T obj_i;/* '<S5>/SourceBlock' */
+  ros_slros_internal_block_Publ_T obj_p;/* '<S15>/SinkBlock' */
+  ros_slros_internal_block_Publ_T obj_m;/* '<S14>/SinkBlock' */
   struct {
     void *LoggedData[2];
   } Scope_PWORK;                       /* '<S3>/Scope' */
 
   boolean_T objisempty;                /* '<S7>/SourceBlock' */
-  boolean_T objisempty_h;              /* '<S16>/SinkBlock' */
-  boolean_T objisempty_m;              /* '<S15>/SinkBlock' */
+  boolean_T objisempty_h;              /* '<S15>/SinkBlock' */
+  boolean_T objisempty_m;              /* '<S14>/SinkBlock' */
   boolean_T objisempty_c;              /* '<S5>/SourceBlock' */
-  boolean_T objisempty_g;              /* '<S4>/Get Parameter1' */
-  boolean_T objisempty_cw;             /* '<Root>/Get Parameter7' */
 } DW_hoffmansubsystem_T;
 
 /* Parameters (default storage) */
 struct P_hoffmansubsystem_T_ {
   SL_Bus_hoffmansubsystem_nav_msgs_Odometry Out1_Y0;/* Computed Parameter: Out1_Y0
-                                                     * Referenced by: '<S14>/Out1'
+                                                     * Referenced by: '<S13>/Out1'
                                                      */
   SL_Bus_hoffmansubsystem_nav_msgs_Odometry Constant_Value;/* Computed Parameter: Constant_Value
                                                             * Referenced by: '<S5>/Constant'
@@ -101,7 +94,7 @@ struct P_hoffmansubsystem_T_ {
                                                                       * Referenced by: '<S2>/Constant'
                                                                       */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist Out1_Y0_n;/* Computed Parameter: Out1_Y0_n
-                                                         * Referenced by: '<S17>/Out1'
+                                                         * Referenced by: '<S16>/Out1'
                                                          */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist Constant_Value_j;/* Computed Parameter: Constant_Value_j
                                                                 * Referenced by: '<S7>/Constant'
@@ -113,19 +106,10 @@ struct P_hoffmansubsystem_T_ {
                                         * Referenced by: '<S3>/k1'
                                         */
   real_T Constant_Value_je;            /* Expression: 1
-                                        * Referenced by: '<S22>/Constant'
+                                        * Referenced by: '<S21>/Constant'
                                         */
   real_T Constant_Value_o;             /* Expression: 1
-                                        * Referenced by: '<S23>/Constant'
-                                        */
-  real_T pathChoice_Value;             /* Expression: 1
-                                        * Referenced by: '<S4>/pathChoice '
-                                        */
-  real_T Constant_Value_lw;            /* Expression: 0.0
-                                        * Referenced by: '<S4>/Constant'
-                                        */
-  real_T len_Value;                    /* Expression: 36.6
-                                        * Referenced by: '<S4>/len'
+                                        * Referenced by: '<S22>/Constant'
                                         */
   real_T heading_Value;                /* Expression: 0
                                         * Referenced by: '<S4>/heading'
@@ -133,7 +117,7 @@ struct P_hoffmansubsystem_T_ {
   real_T Switch_Threshold;             /* Expression: 4
                                         * Referenced by: '<S3>/Switch'
                                         */
-  real_T k_Value;                      /* Expression: .7
+  real_T k_Value;                      /* Expression: 0.4
                                         * Referenced by: '<S3>/k'
                                         */
   real_T Gain_Gain;                    /* Expression: -1
@@ -143,7 +127,7 @@ struct P_hoffmansubsystem_T_ {
                                         * Referenced by: '<S9>/Constant'
                                         */
   real_T u2_Gain;                      /* Expression: 0.5
-                                        * Referenced by: '<S27>/1//2'
+                                        * Referenced by: '<S26>/1//2'
                                         */
 };
 
@@ -167,7 +151,18 @@ extern "C" {
 #endif
 
 /* Block signals (default storage) */
-extern B_hoffmansubsystem_T hoffmansubsystem_B;
+#ifdef __cplusplus
+
+extern "C" {
+
+#endif
+
+  extern B_hoffmansubsystem_T hoffmansubsystem_B;
+
+#ifdef __cplusplus
+
+}
+#endif
 
 /* Block states (default storage) */
 extern DW_hoffmansubsystem_T hoffmansubsystem_DW;
@@ -228,21 +223,20 @@ extern "C" {
  * '<S9>'   : 'hoffmansubsystem/yaw2quat'
  * '<S10>'  : 'hoffmansubsystem/Hoffmann Controller1/calculate delta'
  * '<S11>'  : 'hoffmansubsystem/Hoffmann Controller1/calculate e'
- * '<S12>'  : 'hoffmansubsystem/Select desired path/circle centered'
- * '<S13>'  : 'hoffmansubsystem/Select desired path/straight line'
- * '<S14>'  : 'hoffmansubsystem/Subscribe3/Enabled Subsystem'
- * '<S15>'  : 'hoffmansubsystem/Subsystem/Publish for follower vel'
- * '<S16>'  : 'hoffmansubsystem/Subsystem/Publish1'
- * '<S17>'  : 'hoffmansubsystem/Velocity from control block /Enabled Subsystem'
- * '<S18>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles'
- * '<S19>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation'
- * '<S20>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize'
- * '<S21>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input'
- * '<S22>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem'
- * '<S23>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem1'
- * '<S24>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem2'
- * '<S25>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus'
- * '<S26>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus/Quaternion Norm'
- * '<S27>'  : 'hoffmansubsystem/yaw2quat/Rotation Angles to Quaternions'
+ * '<S12>'  : 'hoffmansubsystem/Select desired path/straight line'
+ * '<S13>'  : 'hoffmansubsystem/Subscribe3/Enabled Subsystem'
+ * '<S14>'  : 'hoffmansubsystem/Subsystem/Publish for follower vel'
+ * '<S15>'  : 'hoffmansubsystem/Subsystem/Publish1'
+ * '<S16>'  : 'hoffmansubsystem/Velocity from control block /Enabled Subsystem'
+ * '<S17>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles'
+ * '<S18>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation'
+ * '<S19>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize'
+ * '<S20>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input'
+ * '<S21>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem'
+ * '<S22>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem1'
+ * '<S23>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Angle Calculation/Protect asincos input/If Action Subsystem2'
+ * '<S24>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus'
+ * '<S25>'  : 'hoffmansubsystem/quaternion2heading/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus/Quaternion Norm'
+ * '<S26>'  : 'hoffmansubsystem/yaw2quat/Rotation Angles to Quaternions'
  */
 #endif                                 /* RTW_HEADER_hoffmansubsystem_h_ */

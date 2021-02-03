@@ -15,12 +15,6 @@ SimulinkPublisher<geometry_msgs::Twist, SL_Bus_hoffmansubsystem_geometry_msgs_Tw
 // For Block hoffmansubsystem/Subsystem/Publish1
 SimulinkPublisher<visualization_msgs::InteractiveMarkerPose, SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9> Pub_hoffmansubsystem_88;
 
-// For Block hoffmansubsystem/Get Parameter7
-SimulinkParameterGetter<boolean_T, bool> ParamGet_hoffmansubsystem_372;
-
-// For Block hoffmansubsystem/Select desired path/Get Parameter1
-SimulinkParameterGetter<real64_T, double> ParamGet_hoffmansubsystem_351;
-
 void slros_node_init(int argc, char** argv)
 {
   ros::init(argc, argv, SLROSNodeName);

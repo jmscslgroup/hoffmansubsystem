@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.506
- * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
- * C++ source code generated on : Wed Oct 30 12:47:55 2019
+ * Model version              : 1.521
+ * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
+ * C++ source code generated on : Thu Aug 27 16:54:53 2020
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -153,49 +153,27 @@ typedef struct {
 
 #endif
 
-#ifndef typedef_d_robotics_slcore_internal_bl_T
-#define typedef_d_robotics_slcore_internal_bl_T
-
-typedef struct {
-  int16_T __dummy;
-} d_robotics_slcore_internal_bl_T;
-
-#endif                               /*typedef_d_robotics_slcore_internal_bl_T*/
-
-#ifndef typedef_robotics_slros_internal_block_T
-#define typedef_robotics_slros_internal_block_T
+#ifndef typedef_ros_slros_internal_block_Subs_T
+#define typedef_ros_slros_internal_block_Subs_T
 
 typedef struct {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
-  real_T ticksUntilNextHit;
-  d_robotics_slcore_internal_bl_T SampleTimeHandler;
-} robotics_slros_internal_block_T;
+} ros_slros_internal_block_Subs_T;
 
-#endif                               /*typedef_robotics_slros_internal_block_T*/
+#endif                               /*typedef_ros_slros_internal_block_Subs_T*/
 
-#ifndef typedef_robotics_slros_internal_blo_p_T
-#define typedef_robotics_slros_internal_blo_p_T
+#ifndef typedef_ros_slros_internal_block_Publ_T
+#define typedef_ros_slros_internal_block_Publ_T
 
 typedef struct {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
-} robotics_slros_internal_blo_p_T;
+} ros_slros_internal_block_Publ_T;
 
-#endif                               /*typedef_robotics_slros_internal_blo_p_T*/
-
-#ifndef typedef_robotics_slros_internal_bl_px_T
-#define typedef_robotics_slros_internal_bl_px_T
-
-typedef struct {
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-} robotics_slros_internal_bl_px_T;
-
-#endif                               /*typedef_robotics_slros_internal_bl_px_T*/
+#endif                               /*typedef_ros_slros_internal_block_Publ_T*/
 
 /* Parameters (default storage) */
 typedef struct P_hoffmansubsystem_T_ P_hoffmansubsystem_T;

@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.506
- * Simulink Coder version : 9.1 (R2019a) 23-Nov-2018
- * C++ source code generated on : Wed Oct 30 12:47:55 2019
+ * Model version              : 1.521
+ * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
+ * C++ source code generated on : Thu Aug 27 16:54:53 2020
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -24,7 +24,7 @@
 /* Block parameters (default storage) */
 P_hoffmansubsystem_T hoffmansubsystem_P = {
   /* Computed Parameter: Out1_Y0
-   * Referenced by: '<S14>/Out1'
+   * Referenced by: '<S13>/Out1'
    */
   {
     {
@@ -264,7 +264,7 @@ P_hoffmansubsystem_T hoffmansubsystem_P = {
   },
 
   /* Computed Parameter: Out1_Y0_n
-   * Referenced by: '<S17>/Out1'
+   * Referenced by: '<S16>/Out1'
    */
   {
     {
@@ -320,29 +320,14 @@ P_hoffmansubsystem_T hoffmansubsystem_P = {
   0.0,
 
   /* Expression: 1
+   * Referenced by: '<S21>/Constant'
+   */
+  1.0,
+
+  /* Expression: 1
    * Referenced by: '<S22>/Constant'
    */
   1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S23>/Constant'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S4>/pathChoice '
-   */
-  1.0,
-
-  /* Expression: 0.0
-   * Referenced by: '<S4>/Constant'
-   */
-  0.0,
-
-  /* Expression: 36.6
-   * Referenced by: '<S4>/len'
-   */
-  36.6,
 
   /* Expression: 0
    * Referenced by: '<S4>/heading'
@@ -354,10 +339,10 @@ P_hoffmansubsystem_T hoffmansubsystem_P = {
    */
   4.0,
 
-  /* Expression: .7
+  /* Expression: 0.4
    * Referenced by: '<S3>/k'
    */
-  0.7,
+  0.4,
 
   /* Expression: -1
    * Referenced by: '<S3>/Gain'
@@ -370,7 +355,7 @@ P_hoffmansubsystem_T hoffmansubsystem_P = {
   0.0,
 
   /* Expression: 0.5
-   * Referenced by: '<S27>/1//2'
+   * Referenced by: '<S26>/1//2'
    */
   0.5
 };
