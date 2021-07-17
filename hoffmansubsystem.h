@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.521
- * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C++ source code generated on : Thu Aug 27 16:54:53 2020
+ * Model version              : 4.1
+ * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
+ * C++ source code generated on : Mon May 24 02:35:19 2021
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,64 +23,53 @@
 #include <math.h>
 #include <string.h>
 #include <stddef.h>
-#ifndef hoffmansubsystem_COMMON_INCLUDES_
-# define hoffmansubsystem_COMMON_INCLUDES_
 #include "rtwtypes.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "slros_initialize.h"
-#endif                                 /* hoffmansubsystem_COMMON_INCLUDES_ */
-
 #include "hoffmansubsystem_types.h"
 
 /* Shared type includes */
 #include "multiword_types.h"
 #include "rtGetInf.h"
 #include "rt_nonfinite.h"
-#include "rtGetNaN.h"
 #include "rt_defines.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
-# define rtmGetErrorStatus(rtm)        ((rtm)->errorStatus)
+#define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)
 #endif
 
 #ifndef rtmSetErrorStatus
-# define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
+#define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
 /* Block signals (default storage) */
-typedef struct {
+struct B_hoffmansubsystem_T {
   real_T TmpSignalConversionAtSFunct[30000];/* '<S3>/calculate e' */
   real_T ys[10000];                    /* '<S4>/straight line' */
-  real_T xs[10000];                    /* '<S4>/straight line' */
   SL_Bus_hoffmansubsystem_nav_msgs_Odometry In1;/* '<S13>/In1' */
   SL_Bus_hoffmansubsystem_nav_msgs_Odometry b_varargout_2;
   SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9 BusAssignment2;/* '<Root>/Bus Assignment2' */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist In1_k;/* '<S16>/In1' */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist BusAssignment1;/* '<Root>/Bus Assignment1' */
   real_T etmp;
-  real_T Product3;                     /* '<S19>/Product3' */
-  real_T Product2;                     /* '<S19>/Product2' */
-  real_T q0;                           /* '<S26>/q0' */
-  real_T rtb_ys_m;
-} B_hoffmansubsystem_T;
+  real_T e;                            /* '<S3>/calculate e' */
+};
 
 /* Block states (default storage) for system '<Root>' */
-typedef struct {
-  ros_slros_internal_block_Subs_T obj; /* '<S7>/SourceBlock' */
-  ros_slros_internal_block_Subs_T obj_i;/* '<S5>/SourceBlock' */
-  ros_slros_internal_block_Publ_T obj_p;/* '<S15>/SinkBlock' */
-  ros_slros_internal_block_Publ_T obj_m;/* '<S14>/SinkBlock' */
-  struct {
-    void *LoggedData[2];
-  } Scope_PWORK;                       /* '<S3>/Scope' */
-
+struct DW_hoffmansubsystem_T {
+  ros_slros_internal_block_GetP_T obj; /* '<Root>/Get Parameter' */
+  ros_slroscpp_internal_block_S_T obj_p;/* '<S7>/SourceBlock' */
+  ros_slroscpp_internal_block_S_T obj_i;/* '<S5>/SourceBlock' */
+  ros_slroscpp_internal_block_P_T obj_pi;/* '<S15>/SinkBlock' */
+  ros_slroscpp_internal_block_P_T obj_m;/* '<S14>/SinkBlock' */
   boolean_T objisempty;                /* '<S7>/SourceBlock' */
   boolean_T objisempty_h;              /* '<S15>/SinkBlock' */
   boolean_T objisempty_m;              /* '<S14>/SinkBlock' */
   boolean_T objisempty_c;              /* '<S5>/SourceBlock' */
-} DW_hoffmansubsystem_T;
+  boolean_T objisempty_c4;             /* '<Root>/Get Parameter' */
+};
 
 /* Parameters (default storage) */
 struct P_hoffmansubsystem_T_ {
@@ -93,14 +82,14 @@ struct P_hoffmansubsystem_T_ {
   SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9 Constant_Value_b;/* Computed Parameter: Constant_Value_b
                                                                       * Referenced by: '<S2>/Constant'
                                                                       */
+  SL_Bus_hoffmansubsystem_geometry_msgs_Twist Constant_Value_l;/* Computed Parameter: Constant_Value_l
+                                                                * Referenced by: '<S1>/Constant'
+                                                                */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist Out1_Y0_n;/* Computed Parameter: Out1_Y0_n
                                                          * Referenced by: '<S16>/Out1'
                                                          */
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist Constant_Value_j;/* Computed Parameter: Constant_Value_j
                                                                 * Referenced by: '<S7>/Constant'
-                                                                */
-  SL_Bus_hoffmansubsystem_geometry_msgs_Twist Constant_Value_l;/* Computed Parameter: Constant_Value_l
-                                                                * Referenced by: '<S1>/Constant'
                                                                 */
   real_T k1_Value;                     /* Expression: 0
                                         * Referenced by: '<S3>/k1'
@@ -116,9 +105,6 @@ struct P_hoffmansubsystem_T_ {
                                         */
   real_T Switch_Threshold;             /* Expression: 4
                                         * Referenced by: '<S3>/Switch'
-                                        */
-  real_T k_Value;                      /* Expression: 0.4
-                                        * Referenced by: '<S3>/k'
                                         */
   real_T Gain_Gain;                    /* Expression: -1
                                         * Referenced by: '<S3>/Gain'
@@ -157,7 +143,7 @@ extern "C" {
 
 #endif
 
-  extern B_hoffmansubsystem_T hoffmansubsystem_B;
+  extern struct B_hoffmansubsystem_T hoffmansubsystem_B;
 
 #ifdef __cplusplus
 
@@ -165,7 +151,7 @@ extern "C" {
 #endif
 
 /* Block states (default storage) */
-extern DW_hoffmansubsystem_T hoffmansubsystem_DW;
+extern struct DW_hoffmansubsystem_T hoffmansubsystem_DW;
 
 #ifdef __cplusplus
 

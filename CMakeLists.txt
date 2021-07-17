@@ -18,7 +18,7 @@ visualization_msgs
 )
 
 add_definitions(
--DMODEL=hoffmansubsystem -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0 -DUNIX -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTID01EQ=0 -DONESTEPFCN=1 -DTERMFCN=1 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0 -DROS_PROJECT -DMW_SCHED_OTHER -DSTACK_SIZE=64 -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__ -DRT=RT )
+-DMODEL=hoffmansubsystem -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0 -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTID01EQ=0 -DONESTEPFCN=1 -DTERMFCN=1 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0 -DROS_PROJECT -DMW_SCHED_OTHER -DSTACK_SIZE=64 -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__ -DRT=RT )
 
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
@@ -51,13 +51,13 @@ file(GLOB ${PROJECT_NAME}_CPP_SOURCES RELATIVE ${PROJECT_SOURCE_DIR} ${PROJECT_S
 
 ## Declare executable
 add_executable(${PROJECT_NAME}_node
-   ert_main.cpp
    hoffmansubsystem.cpp
    hoffmansubsystem_data.cpp
    rtGetInf.cpp
    rtGetNaN.cpp
    rt_nonfinite.cpp
-   linuxinitialize.cpp
+   rosnodeinterface.cpp
+   main.cpp
    slros_busmsg_conversion.cpp
    slros_initialize.cpp
    slros_generic_param.cpp
@@ -74,8 +74,9 @@ target_link_libraries(${PROJECT_NAME}_node
    ${catkin_LIBRARIES}
    ${Boost_LIBRARIES}
    rt
+   ${CMAKE_DL_LIBS}
 )
 
 set_target_properties(${PROJECT_NAME}_node PROPERTIES COMPILE_FLAGS " ")
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fpermissive" )
 SET( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -include stdbool.h" )

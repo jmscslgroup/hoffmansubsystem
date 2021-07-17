@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.521
- * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C++ source code generated on : Thu Aug 27 16:54:53 2020
+ * Model version              : 4.1
+ * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
+ * C++ source code generated on : Mon May 24 02:35:19 2021
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -39,26 +39,26 @@ extern "C" {
   extern boolean_T rtIsInfF(real32_T value);
   extern boolean_T rtIsNaN(real_T value);
   extern boolean_T rtIsNaNF(real32_T value);
-  typedef struct {
+  struct BigEndianIEEEDouble {
     struct {
       uint32_T wordH;
       uint32_T wordL;
     } words;
-  } BigEndianIEEEDouble;
+  };
 
-  typedef struct {
+  struct LittleEndianIEEEDouble {
     struct {
       uint32_T wordL;
       uint32_T wordH;
     } words;
-  } LittleEndianIEEEDouble;
+  };
 
-  typedef struct {
+  struct IEEESingle {
     union {
       real32_T wordLreal;
       uint32_T wordLuint;
     } wordL;
-  } IEEESingle;
+  };
 
 #ifdef __cplusplus
 

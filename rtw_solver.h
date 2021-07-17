@@ -117,7 +117,9 @@ typedef struct _ssSolverInfo_tag {
     int_T       ignoredZcDiagnostic;
     int_T       maskedZcDiagnostic;
     boolean_T   isOutputMethodComputed;
-    int_T       solverOrder;
+    int_T       maxZcBracketingIterations;
+    boolean_T   isMinorOutputWithModeChange;
+    int_T       maxZcPerIntegrationInterval;
 } ssSolverInfo;
 
 /* Support old name RTWSolverInfo */
@@ -176,9 +178,6 @@ typedef ssSolverInfo RTWSolverInfo;
 
 #define rtsiSetSolverMaxOrder(S,smo) ((S)->solverMaxOrder = (smo))
 #define rtsiGetSolverMaxOrder(S)     (S)->solverMaxOrder
-
-#define rtsiSetSolverOrder(S,so) (ssGetSolverInfo(S)->solverOrder = (so))
-#define rtsiGetSolverOrder(S)    ssGetSolverInfo(S)->solverOrder
 
 #define rtsiSetSolverJacobianMethodControl(S,smcm)   (ssGetSolverInfo(S)->solverJacobianMethodControl = (smcm))
 #define rtsiGetSolverJacobianMethodControl(S)        ssGetSolverInfo(S)->solverJacobianMethodControl
@@ -257,6 +256,11 @@ typedef ssSolverInfo RTWSolverInfo;
 
 #define rtsiSetSolverOutputComputed(S,val) ((S)->isOutputMethodComputed = (val))
 #define rtsiIsSolverOutputComputed(S) (S)->isOutputMethodComputed
+
+#define rtsiSetIsMinorOutputWithModeChange(S,sn) ((S)->isMinorOutputWithModeChange  = (sn))
+#define rtsiGetIsMinorOutputWithModeChange(S)    (S)->isMinorOutputWithModeChange
+
+#define rtsiGetIsOkayToUpdateMode(S) (rtsiGetSimTimeStep(S) == MAJOR_TIME_STEP || rtsiGetIsMinorOutputWithModeChange(S)) 
 
 #endif /* !NO_FLOATS */
 

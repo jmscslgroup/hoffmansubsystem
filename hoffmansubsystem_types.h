@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.521
- * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C++ source code generated on : Thu Aug 27 16:54:53 2020
+ * Model version              : 4.1
+ * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
+ * C++ source code generated on : Mon May 24 02:35:19 2021
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22,158 +22,197 @@
 #define RTW_HEADER_hoffmansubsystem_types_h_
 #include "rtwtypes.h"
 #include "multiword_types.h"
+
+/* Model Code Variants */
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Vector3_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Vector3_
 
-typedef struct {
+struct SL_Bus_hoffmansubsystem_geometry_msgs_Vector3
+{
   real_T X;
   real_T Y;
   real_T Z;
-} SL_Bus_hoffmansubsystem_geometry_msgs_Vector3;
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Twist_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Twist_
 
-typedef struct {
+struct SL_Bus_hoffmansubsystem_geometry_msgs_Twist
+{
   SL_Bus_hoffmansubsystem_geometry_msgs_Vector3 Linear;
   SL_Bus_hoffmansubsystem_geometry_msgs_Vector3 Angular;
-} SL_Bus_hoffmansubsystem_geometry_msgs_Twist;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_SL_Bus_ROSVariableLengthArrayInfo_
-#define DEFINED_TYPEDEF_FOR_SL_Bus_ROSVariableLengthArrayInfo_
-
-typedef struct {
-  uint32_T CurrentLength;
-  uint32_T ReceivedLength;
-} SL_Bus_ROSVariableLengthArrayInfo;
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_ros_time_Time_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_ros_time_Time_
 
-typedef struct {
+struct SL_Bus_hoffmansubsystem_ros_time_Time
+{
   real_T Sec;
   real_T Nsec;
-} SL_Bus_hoffmansubsystem_ros_time_Time;
+};
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_SL_Bus_ROSVariableLengthArrayInfo_
+#define DEFINED_TYPEDEF_FOR_SL_Bus_ROSVariableLengthArrayInfo_
+
+struct SL_Bus_ROSVariableLengthArrayInfo
+{
+  uint32_T CurrentLength;
+  uint32_T ReceivedLength;
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_std_msgs_Header_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_std_msgs_Header_
 
-typedef struct {
+struct SL_Bus_hoffmansubsystem_std_msgs_Header
+{
   uint32_T Seq;
+  SL_Bus_hoffmansubsystem_ros_time_Time Stamp;
   uint8_T FrameId[128];
   SL_Bus_ROSVariableLengthArrayInfo FrameId_SL_Info;
-  SL_Bus_hoffmansubsystem_ros_time_Time Stamp;
-} SL_Bus_hoffmansubsystem_std_msgs_Header;
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Point_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Point_
 
-typedef struct {
+struct SL_Bus_hoffmansubsystem_geometry_msgs_Point
+{
   real_T X;
   real_T Y;
   real_T Z;
-} SL_Bus_hoffmansubsystem_geometry_msgs_Point;
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Quaternion_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Quaternion_
 
-typedef struct {
+struct SL_Bus_hoffmansubsystem_geometry_msgs_Quaternion
+{
   real_T X;
   real_T Y;
   real_T Z;
   real_T W;
-} SL_Bus_hoffmansubsystem_geometry_msgs_Quaternion;
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Pose_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_Pose_
 
-typedef struct {
+struct SL_Bus_hoffmansubsystem_geometry_msgs_Pose
+{
   SL_Bus_hoffmansubsystem_geometry_msgs_Point Position;
   SL_Bus_hoffmansubsystem_geometry_msgs_Quaternion Orientation;
-} SL_Bus_hoffmansubsystem_geometry_msgs_Pose;
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9_
 
-typedef struct {
-  uint8_T Name[128];
-  SL_Bus_ROSVariableLengthArrayInfo Name_SL_Info;
+struct SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9
+{
   SL_Bus_hoffmansubsystem_std_msgs_Header Header;
   SL_Bus_hoffmansubsystem_geometry_msgs_Pose Pose;
-} SL_Bus_hoffmansubsystem_InteractiveMarkerPose_av2ao9;
+  uint8_T Name[128];
+  SL_Bus_ROSVariableLengthArrayInfo Name_SL_Info;
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_PoseWithCovariance_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_PoseWithCovariance_
 
-typedef struct {
-  real_T Covariance[36];
+struct SL_Bus_hoffmansubsystem_geometry_msgs_PoseWithCovariance
+{
   SL_Bus_hoffmansubsystem_geometry_msgs_Pose Pose;
-} SL_Bus_hoffmansubsystem_geometry_msgs_PoseWithCovariance;
+  real_T Covariance[36];
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_TwistWithCovariance_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_geometry_msgs_TwistWithCovariance_
 
-typedef struct {
-  real_T Covariance[36];
+struct SL_Bus_hoffmansubsystem_geometry_msgs_TwistWithCovariance
+{
   SL_Bus_hoffmansubsystem_geometry_msgs_Twist Twist;
-} SL_Bus_hoffmansubsystem_geometry_msgs_TwistWithCovariance;
+  real_T Covariance[36];
+};
 
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_nav_msgs_Odometry_
 #define DEFINED_TYPEDEF_FOR_SL_Bus_hoffmansubsystem_nav_msgs_Odometry_
 
-typedef struct {
+struct SL_Bus_hoffmansubsystem_nav_msgs_Odometry
+{
+  SL_Bus_hoffmansubsystem_std_msgs_Header Header;
   uint8_T ChildFrameId[128];
   SL_Bus_ROSVariableLengthArrayInfo ChildFrameId_SL_Info;
-  SL_Bus_hoffmansubsystem_std_msgs_Header Header;
   SL_Bus_hoffmansubsystem_geometry_msgs_PoseWithCovariance Pose;
   SL_Bus_hoffmansubsystem_geometry_msgs_TwistWithCovariance Twist;
-} SL_Bus_hoffmansubsystem_nav_msgs_Odometry;
+};
 
 #endif
 
-#ifndef typedef_ros_slros_internal_block_Subs_T
-#define typedef_ros_slros_internal_block_Subs_T
+#ifndef struct_f_robotics_slcore_internal_bl_T
+#define struct_f_robotics_slcore_internal_bl_T
 
-typedef struct {
+struct f_robotics_slcore_internal_bl_T
+{
+  int16_T __dummy;
+};
+
+#endif                              /* struct_f_robotics_slcore_internal_bl_T */
+
+#ifndef struct_ros_slros_internal_block_GetP_T
+#define struct_ros_slros_internal_block_GetP_T
+
+struct ros_slros_internal_block_GetP_T
+{
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
-} ros_slros_internal_block_Subs_T;
+  f_robotics_slcore_internal_bl_T SampleTimeHandler;
+};
 
-#endif                               /*typedef_ros_slros_internal_block_Subs_T*/
+#endif                              /* struct_ros_slros_internal_block_GetP_T */
 
-#ifndef typedef_ros_slros_internal_block_Publ_T
-#define typedef_ros_slros_internal_block_Publ_T
+#ifndef struct_ros_slroscpp_internal_block_S_T
+#define struct_ros_slroscpp_internal_block_S_T
 
-typedef struct {
+struct ros_slroscpp_internal_block_S_T
+{
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
-} ros_slros_internal_block_Publ_T;
+};
 
-#endif                               /*typedef_ros_slros_internal_block_Publ_T*/
+#endif                              /* struct_ros_slroscpp_internal_block_S_T */
+
+#ifndef struct_ros_slroscpp_internal_block_P_T
+#define struct_ros_slroscpp_internal_block_P_T
+
+struct ros_slroscpp_internal_block_P_T
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+};
+
+#endif                              /* struct_ros_slroscpp_internal_block_P_T */
 
 /* Parameters (default storage) */
 typedef struct P_hoffmansubsystem_T_ P_hoffmansubsystem_T;

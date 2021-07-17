@@ -7,9 +7,9 @@
  *
  * Code generation for model "hoffmansubsystem".
  *
- * Model version              : 1.521
- * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C++ source code generated on : Thu Aug 27 16:54:53 2020
+ * Model version              : 4.1
+ * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
+ * C++ source code generated on : Mon May 24 02:35:19 2021
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -30,41 +30,6 @@ DW_hoffmansubsystem_T hoffmansubsystem_DW;
 /* Real-time model */
 RT_MODEL_hoffmansubsystem_T hoffmansubsystem_M_ = RT_MODEL_hoffmansubsystem_T();
 RT_MODEL_hoffmansubsystem_T *const hoffmansubsystem_M = &hoffmansubsystem_M_;
-
-/* Forward declaration for local functions */
-static void hoffmansubsystem_linspace(real_T d1, real_T d2, real_T y[10000]);
-static void matlabCodegenHandle_matlabCodeg(ros_slros_internal_block_Subs_T *obj);
-static void matlabCodegenHandle_matlabCod_p(ros_slros_internal_block_Publ_T *obj);
-
-/* Function for MATLAB Function: '<S4>/straight line' */
-static void hoffmansubsystem_linspace(real_T d1, real_T d2, real_T y[10000])
-{
-  real_T delta1;
-  real_T delta2;
-  int16_T c_k;
-  y[9999] = d2;
-  y[0] = d1;
-  if (d1 == -d2) {
-    for (c_k = 0; c_k < 9998; c_k++) {
-      y[c_k + 1] = ((static_cast<real_T>(c_k) + 2.0) * 2.0 - 10001.0) / 9999.0 *
-        d2;
-    }
-  } else if (((d1 < 0.0) != (d2 < 0.0)) && ((fabs(d1) > 8.9884656743115785E+307)
-              || (fabs(d2) > 8.9884656743115785E+307))) {
-    delta1 = d1 / 9999.0;
-    delta2 = d2 / 9999.0;
-    for (c_k = 0; c_k < 9998; c_k++) {
-      y[c_k + 1] = ((static_cast<real_T>(c_k) + 1.0) * delta2 + d1) - (
-        static_cast<real_T>(c_k) + 1.0) * delta1;
-    }
-  } else {
-    delta1 = (d2 - d1) / 9999.0;
-    for (c_k = 0; c_k < 9998; c_k++) {
-      y[c_k + 1] = (static_cast<real_T>(c_k) + 1.0) * delta1 + d1;
-    }
-  }
-}
-
 real_T rt_atan2d_snf(real_T u0, real_T u1)
 {
   real_T y;
@@ -101,32 +66,18 @@ real_T rt_atan2d_snf(real_T u0, real_T u1)
   return y;
 }
 
-static void matlabCodegenHandle_matlabCodeg(ros_slros_internal_block_Subs_T *obj)
-{
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-  }
-}
-
-static void matlabCodegenHandle_matlabCod_p(ros_slros_internal_block_Publ_T *obj)
-{
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-  }
-}
-
 /* Model step function */
 void hoffmansubsystem_step(void)
 {
-  /* local block i/o variables */
-  real_T rtb_Sum;
-  real_T rtb_e;
+  real_T rtb_Product2;
+  real_T rtb_Product3;
+  real_T rtb_q0;
+  real_T rtb_q3;
+  real_T rtb_sincos_o1_idx_0;
+  real_T u_tmp;
   int16_T b_index;
-  boolean_T b_varargout_1;
   int16_T i;
-  real_T rtb_sincos_o2_idx_0;
-  real_T rtb_sincos_o2_idx_1;
-  real_T tmp;
+  boolean_T b_varargout_1;
 
   /* Outputs for Atomic SubSystem: '<Root>/Subscribe3' */
   /* MATLABSystem: '<S5>/SourceBlock' incorporates:
@@ -151,38 +102,40 @@ void hoffmansubsystem_step(void)
    */
   /* MATLAB Function 'Select desired path/straight line': '<S12>:1' */
   /* '<S12>:1:3' r = linspace(0,10000,10000); */
-  hoffmansubsystem_linspace(0.0, 10000.0, hoffmansubsystem_B.ys);
-
-  /* '<S12>:1:4' xs = r*cos(heading); */
-  hoffmansubsystem_B.Product3 = cos(hoffmansubsystem_P.heading_Value);
-  for (i = 0; i < 10000; i++) {
-    hoffmansubsystem_B.xs[i] = hoffmansubsystem_B.ys[i] *
-      hoffmansubsystem_B.Product3;
+  hoffmansubsystem_B.ys[9999] = 10000.0;
+  hoffmansubsystem_B.ys[0] = 0.0;
+  for (b_index = 0; b_index < 9998; b_index++) {
+    hoffmansubsystem_B.ys[b_index + 1] = (static_cast<real_T>(b_index) + 1.0) *
+      1.000100010001;
   }
 
+  /* '<S12>:1:4' xs = r*cos(heading); */
+  hoffmansubsystem_B.e = cos(hoffmansubsystem_P.heading_Value);
+
   /* '<S12>:1:5' ys = r*sin(heading); */
-  hoffmansubsystem_B.Product3 = sin(hoffmansubsystem_P.heading_Value);
+  hoffmansubsystem_B.etmp = sin(hoffmansubsystem_P.heading_Value);
 
   /* '<S12>:1:6' phis = heading*ones(1,length(r)); */
   for (i = 0; i < 10000; i++) {
-    hoffmansubsystem_B.rtb_ys_m = hoffmansubsystem_B.ys[i] *
-      hoffmansubsystem_B.Product3;
+    /* MATLAB Function: '<S4>/straight line' */
+    rtb_Product3 = hoffmansubsystem_B.ys[i];
 
     /* SignalConversion generated from: '<S11>/ SFunction ' incorporates:
+     *  Constant: '<S4>/heading'
      *  MATLAB Function: '<S3>/calculate e'
+     *  MATLAB Function: '<S4>/straight line'
      */
-    hoffmansubsystem_B.TmpSignalConversionAtSFunct[i] = hoffmansubsystem_B.xs[i];
-    hoffmansubsystem_B.TmpSignalConversionAtSFunct[i + 10000] =
-      hoffmansubsystem_B.rtb_ys_m;
+    hoffmansubsystem_B.TmpSignalConversionAtSFunct[i] = rtb_Product3 *
+      hoffmansubsystem_B.e;
+    hoffmansubsystem_B.TmpSignalConversionAtSFunct[i + 10000] = rtb_Product3 *
+      hoffmansubsystem_B.etmp;
     hoffmansubsystem_B.TmpSignalConversionAtSFunct[i + 20000] =
       hoffmansubsystem_P.heading_Value;
-    hoffmansubsystem_B.ys[i] = hoffmansubsystem_B.rtb_ys_m;
   }
-
-  /* End of MATLAB Function: '<S4>/straight line' */
 
   /* MATLAB Function: '<S3>/calculate e' incorporates:
    *  Gain: '<S26>/1//2'
+   *  SignalConversion generated from: '<S11>/ SFunction '
    */
   /* MATLAB Function 'Hoffmann Controller1/calculate e': '<S11>:1' */
   /* '<S11>:1:3' path=reshape(pathV,[],3); */
@@ -191,7 +144,7 @@ void hoffmansubsystem_step(void)
   /* '<S11>:1:6' phi1=path(1,3); */
   /* '<S11>:1:7' etmp = inf; */
   /* '<S11>:1:8' e = inf; */
-  hoffmansubsystem_B.Product3 = (rtInf);
+  hoffmansubsystem_B.e = (rtInf);
 
   /* '<S11>:1:9' index=1; */
   b_index = 0;
@@ -201,15 +154,15 @@ void hoffmansubsystem_step(void)
     /* '<S11>:1:12' etmp = sqrt((x-path(i,1))^2+(y-path(i,2))^2); */
     hoffmansubsystem_B.etmp = hoffmansubsystem_B.In1.Pose.Pose.Position.X -
       hoffmansubsystem_B.TmpSignalConversionAtSFunct[i];
-    hoffmansubsystem_B.q0 = hoffmansubsystem_B.In1.Pose.Pose.Position.Y -
+    rtb_Product3 = hoffmansubsystem_B.In1.Pose.Pose.Position.Y -
       hoffmansubsystem_B.TmpSignalConversionAtSFunct[i + 10000];
     hoffmansubsystem_B.etmp = sqrt(hoffmansubsystem_B.etmp *
-      hoffmansubsystem_B.etmp + hoffmansubsystem_B.q0 * hoffmansubsystem_B.q0);
+      hoffmansubsystem_B.etmp + rtb_Product3 * rtb_Product3);
 
     /* '<S11>:1:13' if( etmp < e ) */
-    if (hoffmansubsystem_B.etmp < hoffmansubsystem_B.Product3) {
+    if (hoffmansubsystem_B.etmp < hoffmansubsystem_B.e) {
       /* '<S11>:1:14' e = etmp; */
-      hoffmansubsystem_B.Product3 = hoffmansubsystem_B.etmp;
+      hoffmansubsystem_B.e = hoffmansubsystem_B.etmp;
 
       /* '<S11>:1:15' index=i; */
       b_index = i;
@@ -225,26 +178,24 @@ void hoffmansubsystem_step(void)
   /* '<S11>:1:26' ey2 = sin(phipath); */
   /* '<S11>:1:27' sinnnn = ex1*ey2-ey1*ex2; */
   /* '<S11>:1:28' e = sign(sinnnn)*e; */
-  rtb_sincos_o2_idx_0 = hoffmansubsystem_B.TmpSignalConversionAtSFunct[b_index +
+  rtb_sincos_o1_idx_0 = hoffmansubsystem_B.TmpSignalConversionAtSFunct[b_index +
     20000];
-  hoffmansubsystem_B.rtb_ys_m =
-    hoffmansubsystem_B.TmpSignalConversionAtSFunct[b_index + 10000];
-  hoffmansubsystem_B.etmp =
-    (hoffmansubsystem_B.TmpSignalConversionAtSFunct[b_index] -
-     hoffmansubsystem_B.In1.Pose.Pose.Position.X) * sin(rtb_sincos_o2_idx_0) -
-    (hoffmansubsystem_B.rtb_ys_m - hoffmansubsystem_B.In1.Pose.Pose.Position.Y) *
-    cos(rtb_sincos_o2_idx_0);
-  if (hoffmansubsystem_B.etmp < 0.0) {
-    hoffmansubsystem_B.etmp = -1.0;
-  } else if (hoffmansubsystem_B.etmp > 0.0) {
-    hoffmansubsystem_B.etmp = 1.0;
-  } else if (hoffmansubsystem_B.etmp == 0.0) {
-    hoffmansubsystem_B.etmp = 0.0;
+  u_tmp = hoffmansubsystem_B.TmpSignalConversionAtSFunct[b_index + 10000];
+  rtb_Product3 = (hoffmansubsystem_B.TmpSignalConversionAtSFunct[b_index] -
+                  hoffmansubsystem_B.In1.Pose.Pose.Position.X) * sin
+    (rtb_sincos_o1_idx_0) - (u_tmp - hoffmansubsystem_B.In1.Pose.Pose.Position.Y)
+    * cos(rtb_sincos_o1_idx_0);
+  if (rtb_Product3 < 0.0) {
+    rtb_Product3 = -1.0;
+  } else if (rtb_Product3 > 0.0) {
+    rtb_Product3 = 1.0;
+  } else if (rtb_Product3 == 0.0) {
+    rtb_Product3 = 0.0;
   } else {
-    hoffmansubsystem_B.etmp = (rtNaN);
+    rtb_Product3 = (rtNaN);
   }
 
-  rtb_e = hoffmansubsystem_B.etmp * hoffmansubsystem_B.Product3;
+  hoffmansubsystem_B.e *= rtb_Product3;
 
   /* Outputs for Atomic SubSystem: '<Root>/Velocity from control block ' */
   /* MATLABSystem: '<S7>/SourceBlock' incorporates:
@@ -264,6 +215,9 @@ void hoffmansubsystem_step(void)
   /* End of Outputs for SubSystem: '<S7>/Enabled Subsystem' */
   /* End of Outputs for SubSystem: '<Root>/Velocity from control block ' */
 
+  /* MATLABSystem: '<Root>/Get Parameter' */
+  ParamGet_hoffmansubsystem_375.get_parameter(&hoffmansubsystem_B.etmp);
+
   /* Sqrt: '<S24>/sqrt' incorporates:
    *  Product: '<S25>/Product'
    *  Product: '<S25>/Product1'
@@ -271,65 +225,55 @@ void hoffmansubsystem_step(void)
    *  Product: '<S25>/Product3'
    *  Sum: '<S25>/Sum'
    */
-  hoffmansubsystem_B.Product3 = sqrt
-    (((hoffmansubsystem_B.In1.Pose.Pose.Orientation.W *
-       hoffmansubsystem_B.In1.Pose.Pose.Orientation.W +
-       hoffmansubsystem_B.In1.Pose.Pose.Orientation.X *
-       hoffmansubsystem_B.In1.Pose.Pose.Orientation.X) +
-      hoffmansubsystem_B.In1.Pose.Pose.Orientation.Y *
-      hoffmansubsystem_B.In1.Pose.Pose.Orientation.Y) +
-     hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z *
-     hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z);
+  rtb_Product3 = sqrt(((hoffmansubsystem_B.In1.Pose.Pose.Orientation.W *
+                        hoffmansubsystem_B.In1.Pose.Pose.Orientation.W +
+                        hoffmansubsystem_B.In1.Pose.Pose.Orientation.X *
+                        hoffmansubsystem_B.In1.Pose.Pose.Orientation.X) +
+                       hoffmansubsystem_B.In1.Pose.Pose.Orientation.Y *
+                       hoffmansubsystem_B.In1.Pose.Pose.Orientation.Y) +
+                      hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z *
+                      hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z);
 
   /* Product: '<S19>/Product' */
-  hoffmansubsystem_B.etmp = hoffmansubsystem_B.In1.Pose.Pose.Orientation.W /
-    hoffmansubsystem_B.Product3;
+  rtb_q3 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.W / rtb_Product3;
 
   /* Product: '<S19>/Product1' */
-  hoffmansubsystem_B.q0 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.X /
-    hoffmansubsystem_B.Product3;
+  rtb_q0 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.X / rtb_Product3;
 
   /* Product: '<S19>/Product2' */
-  hoffmansubsystem_B.Product2 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.Y /
-    hoffmansubsystem_B.Product3;
+  rtb_Product2 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.Y / rtb_Product3;
 
   /* Product: '<S19>/Product3' */
-  hoffmansubsystem_B.Product3 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z /
-    hoffmansubsystem_B.Product3;
+  rtb_Product3 = hoffmansubsystem_B.In1.Pose.Pose.Orientation.Z / rtb_Product3;
 
   /* Sum: '<S3>/Sum' incorporates:
    *  Fcn: '<S17>/fcn1'
    *  Fcn: '<S17>/fcn2'
    *  Trigonometry: '<S18>/Trigonometric Function1'
    */
-  rtb_Sum = rt_atan2d_snf((hoffmansubsystem_B.q0 * hoffmansubsystem_B.Product2 +
-    hoffmansubsystem_B.etmp * hoffmansubsystem_B.Product3) * 2.0,
-    ((hoffmansubsystem_B.etmp * hoffmansubsystem_B.etmp + hoffmansubsystem_B.q0 *
-      hoffmansubsystem_B.q0) - hoffmansubsystem_B.Product2 *
-     hoffmansubsystem_B.Product2) - hoffmansubsystem_B.Product3 *
-    hoffmansubsystem_B.Product3) - rtb_sincos_o2_idx_0;
+  rtb_Product3 = rt_atan2d_snf((rtb_q0 * rtb_Product2 + rtb_q3 * rtb_Product3) *
+    2.0, ((rtb_q3 * rtb_q3 + rtb_q0 * rtb_q0) - rtb_Product2 * rtb_Product2) -
+    rtb_Product3 * rtb_Product3) - rtb_sincos_o1_idx_0;
 
   /* MATLAB Function: '<S3>/calculate delta' */
-  hoffmansubsystem_B.Product3 = hoffmansubsystem_B.In1_k.Linear.X;
-  hoffmansubsystem_B.etmp = rtb_Sum;
+  rtb_q3 = hoffmansubsystem_B.In1_k.Linear.X;
+  rtb_q0 = rtb_Product3;
 
   /* MATLAB Function 'Hoffmann Controller1/calculate delta': '<S10>:1' */
   /* '<S10>:1:3' if( abs(v) < eps ) */
   if (fabs(hoffmansubsystem_B.In1_k.Linear.X) < 2.2204460492503131E-16) {
     /* '<S10>:1:4' v = eps; */
-    hoffmansubsystem_B.Product3 = 2.2204460492503131E-16;
+    rtb_q3 = 2.2204460492503131E-16;
   }
 
   /* '<S10>:1:9' if( phi < -pi ) */
-  if (rtb_Sum < -3.1415926535897931) {
+  if (rtb_Product3 < -3.1415926535897931) {
     /* '<S10>:1:10' phi = phi+2*pi; */
-    hoffmansubsystem_B.etmp = rtb_Sum + 6.2831853071795862;
-  } else {
-    if (rtb_Sum > 3.1415926535897931) {
-      /* '<S10>:1:11' elseif( phi > pi ) */
-      /* '<S10>:1:12' phi = phi-2*pi; */
-      hoffmansubsystem_B.etmp = rtb_Sum - 6.2831853071795862;
-    }
+    rtb_q0 = rtb_Product3 + 6.2831853071795862;
+  } else if (rtb_Product3 > 3.1415926535897931) {
+    /* '<S10>:1:11' elseif( phi > pi ) */
+    /* '<S10>:1:12' phi = phi-2*pi; */
+    rtb_q0 = rtb_Product3 - 6.2831853071795862;
   }
 
   /* BusAssignment: '<Root>/Bus Assignment1' incorporates:
@@ -339,7 +283,7 @@ void hoffmansubsystem_step(void)
   hoffmansubsystem_B.BusAssignment1 = hoffmansubsystem_P.Constant_Value_l;
 
   /* Switch: '<S3>/Switch' */
-  if (rtb_e > hoffmansubsystem_P.Switch_Threshold) {
+  if (hoffmansubsystem_B.e > hoffmansubsystem_P.Switch_Threshold) {
     /* BusAssignment: '<Root>/Bus Assignment1' incorporates:
      *  Constant: '<S3>/k1'
      */
@@ -353,13 +297,13 @@ void hoffmansubsystem_step(void)
   /* End of Switch: '<S3>/Switch' */
 
   /* BusAssignment: '<Root>/Bus Assignment1' incorporates:
-   *  Constant: '<S3>/k'
    *  Gain: '<S3>/Gain'
    *  MATLAB Function: '<S3>/calculate delta'
+   *  MATLABSystem: '<Root>/Get Parameter'
    */
   hoffmansubsystem_B.BusAssignment1.Angular.Z = (rt_atan2d_snf
-    (hoffmansubsystem_P.k_Value * rtb_e, hoffmansubsystem_B.Product3) +
-    hoffmansubsystem_B.etmp) * hoffmansubsystem_P.Gain_Gain;
+    (hoffmansubsystem_B.etmp * hoffmansubsystem_B.e, rtb_q3) + rtb_q0) *
+    hoffmansubsystem_P.Gain_Gain;
 
   /* Outputs for Atomic SubSystem: '<S6>/Publish for follower vel' */
   /* MATLABSystem: '<S14>/SinkBlock' */
@@ -370,63 +314,58 @@ void hoffmansubsystem_step(void)
   /* Gain: '<S26>/1//2' incorporates:
    *  Constant: '<S9>/Constant'
    */
-  hoffmansubsystem_B.Product2 = rtb_sincos_o2_idx_0 * hoffmansubsystem_P.u2_Gain;
-  hoffmansubsystem_B.q0 = hoffmansubsystem_P.u2_Gain *
-    hoffmansubsystem_P.Constant_Value_bw;
+  rtb_sincos_o1_idx_0 *= hoffmansubsystem_P.u2_Gain;
+  rtb_q0 = hoffmansubsystem_P.u2_Gain * hoffmansubsystem_P.Constant_Value_bw;
 
   /* Trigonometry: '<S26>/sincos' incorporates:
    *  Gain: '<S26>/1//2'
    */
-  rtb_sincos_o2_idx_0 = cos(hoffmansubsystem_B.Product2);
-  hoffmansubsystem_B.Product2 = sin(hoffmansubsystem_B.Product2);
-  rtb_sincos_o2_idx_1 = cos(hoffmansubsystem_B.q0);
-  hoffmansubsystem_B.etmp = sin(hoffmansubsystem_B.q0);
-  hoffmansubsystem_B.Product3 = cos(hoffmansubsystem_B.q0);
-  hoffmansubsystem_B.q0 = sin(hoffmansubsystem_B.q0);
+  hoffmansubsystem_B.etmp = cos(rtb_sincos_o1_idx_0);
+  rtb_Product2 = sin(rtb_sincos_o1_idx_0);
+  rtb_sincos_o1_idx_0 = cos(rtb_q0);
+  rtb_q0 = sin(rtb_q0);
 
   /* BusAssignment: '<Root>/Bus Assignment2' incorporates:
    *  Constant: '<S2>/Constant'
    *  MATLAB Function: '<S3>/calculate e'
+   *  SignalConversion generated from: '<S11>/ SFunction '
    */
   hoffmansubsystem_B.BusAssignment2 = hoffmansubsystem_P.Constant_Value_b;
   hoffmansubsystem_B.BusAssignment2.Pose.Position.X =
     hoffmansubsystem_B.TmpSignalConversionAtSFunct[b_index];
-  hoffmansubsystem_B.BusAssignment2.Pose.Position.Y =
-    hoffmansubsystem_B.rtb_ys_m;
+  hoffmansubsystem_B.BusAssignment2.Pose.Position.Y = u_tmp;
 
   /* Fcn: '<S26>/q1' incorporates:
    *  Fcn: '<S26>/q0'
+   *  Trigonometry: '<S26>/sincos'
    */
-  hoffmansubsystem_B.rtb_ys_m = rtb_sincos_o2_idx_0 * rtb_sincos_o2_idx_1;
-  tmp = hoffmansubsystem_B.Product2 * hoffmansubsystem_B.etmp;
+  u_tmp = hoffmansubsystem_B.etmp * rtb_sincos_o1_idx_0;
+  rtb_q3 = rtb_Product2 * rtb_q0;
 
   /* BusAssignment: '<Root>/Bus Assignment2' incorporates:
    *  Fcn: '<S26>/q1'
    */
-  hoffmansubsystem_B.BusAssignment2.Pose.Orientation.X =
-    hoffmansubsystem_B.rtb_ys_m * hoffmansubsystem_B.q0 - tmp *
-    hoffmansubsystem_B.Product3;
+  hoffmansubsystem_B.BusAssignment2.Pose.Orientation.X = u_tmp * rtb_q0 - rtb_q3
+    * rtb_sincos_o1_idx_0;
 
   /* Fcn: '<S26>/q2' incorporates:
    *  Fcn: '<S26>/q3'
+   *  Trigonometry: '<S26>/sincos'
    */
-  hoffmansubsystem_B.Product2 *= rtb_sincos_o2_idx_1;
-  rtb_sincos_o2_idx_0 *= hoffmansubsystem_B.etmp;
+  rtb_Product2 *= rtb_sincos_o1_idx_0;
+  hoffmansubsystem_B.etmp *= rtb_q0;
 
   /* BusAssignment: '<Root>/Bus Assignment2' incorporates:
    *  Fcn: '<S26>/q0'
    *  Fcn: '<S26>/q2'
    *  Fcn: '<S26>/q3'
    */
-  hoffmansubsystem_B.BusAssignment2.Pose.Orientation.Y = rtb_sincos_o2_idx_0 *
-    hoffmansubsystem_B.Product3 + hoffmansubsystem_B.Product2 *
-    hoffmansubsystem_B.q0;
-  hoffmansubsystem_B.BusAssignment2.Pose.Orientation.Z =
-    hoffmansubsystem_B.Product2 * hoffmansubsystem_B.Product3 -
-    rtb_sincos_o2_idx_0 * hoffmansubsystem_B.q0;
-  hoffmansubsystem_B.BusAssignment2.Pose.Orientation.W =
-    hoffmansubsystem_B.rtb_ys_m * hoffmansubsystem_B.Product3 + tmp *
-    hoffmansubsystem_B.q0;
+  hoffmansubsystem_B.BusAssignment2.Pose.Orientation.Y = hoffmansubsystem_B.etmp
+    * rtb_sincos_o1_idx_0 + rtb_Product2 * rtb_q0;
+  hoffmansubsystem_B.BusAssignment2.Pose.Orientation.Z = rtb_Product2 *
+    rtb_sincos_o1_idx_0 - hoffmansubsystem_B.etmp * rtb_q0;
+  hoffmansubsystem_B.BusAssignment2.Pose.Orientation.W = u_tmp *
+    rtb_sincos_o1_idx_0 + rtb_q3 * rtb_q0;
 
   /* Outputs for Atomic SubSystem: '<S6>/Publish1' */
   /* MATLABSystem: '<S15>/SinkBlock' */
@@ -452,48 +391,68 @@ void hoffmansubsystem_initialize(void)
                 sizeof(DW_hoffmansubsystem_T));
 
   {
-    char_T tmp[9];
-    char_T tmp_0[8];
-    char_T tmp_1[16];
-    char_T tmp_2[5];
     int16_T i;
-    static const char_T tmp_3[15] = { 'c', 'm', 'd', '_', 'c', 'o', 'n', 't',
-      'r', 'o', 'l', '_', 'v', 'e', 'l' };
+    char_T b_zeroDelimTopic_0[16];
+    char_T b_zeroDelimName[14];
+    char_T b_zeroDelimTopic_2[9];
+    char_T b_zeroDelimTopic_1[8];
+    char_T b_zeroDelimTopic[5];
+    static const char_T tmp[15] = { 'c', 'm', 'd', '_', 'c', 'o', 'n', 't', 'r',
+      'o', 'l', '_', 'v', 'e', 'l' };
 
-    static const char_T tmp_4[7] = { 'c', 'm', 'd', '_', 'v', 'e', 'l' };
+    static const char_T tmp_0[13] = { 'e', 'r', 'r', 'o', 'r', '_', 'c', 'o',
+      'n', 't', 'r', 'o', 'l' };
 
-    static const char_T tmp_5[8] = { 'w', 'a', 'y', 'p', 'o', 'i', 'n', 't' };
+    static const char_T tmp_1[7] = { 'c', 'm', 'd', '_', 'v', 'e', 'l' };
+
+    static const char_T tmp_2[8] = { 'w', 'a', 'y', 'p', 'o', 'i', 'n', 't' };
 
     /* Start for Atomic SubSystem: '<Root>/Subscribe3' */
     /* Start for MATLABSystem: '<S5>/SourceBlock' */
     hoffmansubsystem_DW.obj_i.matlabCodegenIsDeleted = false;
     hoffmansubsystem_DW.objisempty_c = true;
     hoffmansubsystem_DW.obj_i.isInitialized = 1L;
-    tmp_2[0] = 'o';
-    tmp_2[1] = 'd';
-    tmp_2[2] = 'o';
-    tmp_2[3] = 'm';
-    tmp_2[4] = '\x00';
-    Sub_hoffmansubsystem_102.createSubscriber(tmp_2, 1L);
+    b_zeroDelimTopic[0] = 'o';
+    b_zeroDelimTopic[1] = 'd';
+    b_zeroDelimTopic[2] = 'o';
+    b_zeroDelimTopic[3] = 'm';
+    b_zeroDelimTopic[4] = '\x00';
+    Sub_hoffmansubsystem_102.createSubscriber(&b_zeroDelimTopic[0], 1L);
     hoffmansubsystem_DW.obj_i.isSetupComplete = true;
 
     /* End of Start for SubSystem: '<Root>/Subscribe3' */
 
     /* Start for Atomic SubSystem: '<Root>/Velocity from control block ' */
     /* Start for MATLABSystem: '<S7>/SourceBlock' */
-    hoffmansubsystem_DW.obj.matlabCodegenIsDeleted = false;
+    hoffmansubsystem_DW.obj_p.matlabCodegenIsDeleted = false;
     hoffmansubsystem_DW.objisempty = true;
-    hoffmansubsystem_DW.obj.isInitialized = 1L;
+    hoffmansubsystem_DW.obj_p.isInitialized = 1L;
     for (i = 0; i < 15; i++) {
-      tmp_1[i] = tmp_3[i];
+      b_zeroDelimTopic_0[i] = tmp[i];
     }
 
-    tmp_1[15] = '\x00';
-    Sub_hoffmansubsystem_150.createSubscriber(tmp_1, 1L);
-    hoffmansubsystem_DW.obj.isSetupComplete = true;
+    b_zeroDelimTopic_0[15] = '\x00';
+    Sub_hoffmansubsystem_150.createSubscriber(&b_zeroDelimTopic_0[0], 1L);
+    hoffmansubsystem_DW.obj_p.isSetupComplete = true;
 
     /* End of Start for MATLABSystem: '<S7>/SourceBlock' */
     /* End of Start for SubSystem: '<Root>/Velocity from control block ' */
+
+    /* Start for MATLABSystem: '<Root>/Get Parameter' */
+    hoffmansubsystem_DW.obj.matlabCodegenIsDeleted = false;
+    hoffmansubsystem_DW.objisempty_c4 = true;
+    hoffmansubsystem_DW.obj.isInitialized = 1L;
+    for (i = 0; i < 13; i++) {
+      b_zeroDelimName[i] = tmp_0[i];
+    }
+
+    b_zeroDelimName[13] = '\x00';
+    ParamGet_hoffmansubsystem_375.initialize(&b_zeroDelimName[0]);
+    ParamGet_hoffmansubsystem_375.initialize_error_codes(0, 1, 2, 3);
+    ParamGet_hoffmansubsystem_375.set_initial_value(0.7);
+    hoffmansubsystem_DW.obj.isSetupComplete = true;
+
+    /* End of Start for MATLABSystem: '<Root>/Get Parameter' */
 
     /* Start for Atomic SubSystem: '<S6>/Publish for follower vel' */
     /* Start for MATLABSystem: '<S14>/SinkBlock' */
@@ -501,11 +460,11 @@ void hoffmansubsystem_initialize(void)
     hoffmansubsystem_DW.objisempty_m = true;
     hoffmansubsystem_DW.obj_m.isInitialized = 1L;
     for (i = 0; i < 7; i++) {
-      tmp_0[i] = tmp_4[i];
+      b_zeroDelimTopic_1[i] = tmp_1[i];
     }
 
-    tmp_0[7] = '\x00';
-    Pub_hoffmansubsystem_21.createPublisher(tmp_0, 1L);
+    b_zeroDelimTopic_1[7] = '\x00';
+    Pub_hoffmansubsystem_21.createPublisher(&b_zeroDelimTopic_1[0], 1L);
     hoffmansubsystem_DW.obj_m.isSetupComplete = true;
 
     /* End of Start for MATLABSystem: '<S14>/SinkBlock' */
@@ -513,16 +472,16 @@ void hoffmansubsystem_initialize(void)
 
     /* Start for Atomic SubSystem: '<S6>/Publish1' */
     /* Start for MATLABSystem: '<S15>/SinkBlock' */
-    hoffmansubsystem_DW.obj_p.matlabCodegenIsDeleted = false;
+    hoffmansubsystem_DW.obj_pi.matlabCodegenIsDeleted = false;
     hoffmansubsystem_DW.objisempty_h = true;
-    hoffmansubsystem_DW.obj_p.isInitialized = 1L;
+    hoffmansubsystem_DW.obj_pi.isInitialized = 1L;
     for (i = 0; i < 8; i++) {
-      tmp[i] = tmp_5[i];
+      b_zeroDelimTopic_2[i] = tmp_2[i];
     }
 
-    tmp[8] = '\x00';
-    Pub_hoffmansubsystem_88.createPublisher(tmp, 1L);
-    hoffmansubsystem_DW.obj_p.isSetupComplete = true;
+    b_zeroDelimTopic_2[8] = '\x00';
+    Pub_hoffmansubsystem_88.createPublisher(&b_zeroDelimTopic_2[0], 1L);
+    hoffmansubsystem_DW.obj_pi.isSetupComplete = true;
 
     /* End of Start for MATLABSystem: '<S15>/SinkBlock' */
     /* End of Start for SubSystem: '<S6>/Publish1' */
@@ -530,7 +489,9 @@ void hoffmansubsystem_initialize(void)
 
   /* SystemInitialize for Atomic SubSystem: '<Root>/Subscribe3' */
   /* SystemInitialize for Enabled SubSystem: '<S5>/Enabled Subsystem' */
-  /* SystemInitialize for Outport: '<S13>/Out1' */
+  /* SystemInitialize for Outport: '<S13>/Out1' incorporates:
+   *  Inport: '<S13>/In1'
+   */
   hoffmansubsystem_B.In1 = hoffmansubsystem_P.Out1_Y0;
 
   /* End of SystemInitialize for SubSystem: '<S5>/Enabled Subsystem' */
@@ -538,7 +499,9 @@ void hoffmansubsystem_initialize(void)
 
   /* SystemInitialize for Atomic SubSystem: '<Root>/Velocity from control block ' */
   /* SystemInitialize for Enabled SubSystem: '<S7>/Enabled Subsystem' */
-  /* SystemInitialize for Outport: '<S16>/Out1' */
+  /* SystemInitialize for Outport: '<S16>/Out1' incorporates:
+   *  Inport: '<S16>/In1'
+   */
   hoffmansubsystem_B.In1_k = hoffmansubsystem_P.Out1_Y0_n;
 
   /* End of SystemInitialize for SubSystem: '<S7>/Enabled Subsystem' */
@@ -550,25 +513,44 @@ void hoffmansubsystem_terminate(void)
 {
   /* Terminate for Atomic SubSystem: '<Root>/Subscribe3' */
   /* Terminate for MATLABSystem: '<S5>/SourceBlock' */
-  matlabCodegenHandle_matlabCodeg(&hoffmansubsystem_DW.obj_i);
+  if (!hoffmansubsystem_DW.obj_i.matlabCodegenIsDeleted) {
+    hoffmansubsystem_DW.obj_i.matlabCodegenIsDeleted = true;
+  }
 
+  /* End of Terminate for MATLABSystem: '<S5>/SourceBlock' */
   /* End of Terminate for SubSystem: '<Root>/Subscribe3' */
 
   /* Terminate for Atomic SubSystem: '<Root>/Velocity from control block ' */
   /* Terminate for MATLABSystem: '<S7>/SourceBlock' */
-  matlabCodegenHandle_matlabCodeg(&hoffmansubsystem_DW.obj);
+  if (!hoffmansubsystem_DW.obj_p.matlabCodegenIsDeleted) {
+    hoffmansubsystem_DW.obj_p.matlabCodegenIsDeleted = true;
+  }
 
+  /* End of Terminate for MATLABSystem: '<S7>/SourceBlock' */
   /* End of Terminate for SubSystem: '<Root>/Velocity from control block ' */
+
+  /* Terminate for MATLABSystem: '<Root>/Get Parameter' */
+  if (!hoffmansubsystem_DW.obj.matlabCodegenIsDeleted) {
+    hoffmansubsystem_DW.obj.matlabCodegenIsDeleted = true;
+  }
+
+  /* End of Terminate for MATLABSystem: '<Root>/Get Parameter' */
 
   /* Terminate for Atomic SubSystem: '<S6>/Publish for follower vel' */
   /* Terminate for MATLABSystem: '<S14>/SinkBlock' */
-  matlabCodegenHandle_matlabCod_p(&hoffmansubsystem_DW.obj_m);
+  if (!hoffmansubsystem_DW.obj_m.matlabCodegenIsDeleted) {
+    hoffmansubsystem_DW.obj_m.matlabCodegenIsDeleted = true;
+  }
 
+  /* End of Terminate for MATLABSystem: '<S14>/SinkBlock' */
   /* End of Terminate for SubSystem: '<S6>/Publish for follower vel' */
 
   /* Terminate for Atomic SubSystem: '<S6>/Publish1' */
   /* Terminate for MATLABSystem: '<S15>/SinkBlock' */
-  matlabCodegenHandle_matlabCod_p(&hoffmansubsystem_DW.obj_p);
+  if (!hoffmansubsystem_DW.obj_pi.matlabCodegenIsDeleted) {
+    hoffmansubsystem_DW.obj_pi.matlabCodegenIsDeleted = true;
+  }
 
+  /* End of Terminate for MATLABSystem: '<S15>/SinkBlock' */
   /* End of Terminate for SubSystem: '<S6>/Publish1' */
 }

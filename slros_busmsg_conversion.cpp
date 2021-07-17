@@ -171,16 +171,16 @@ void convertFromBus(ros::Time* msgPtr, SL_Bus_hoffmansubsystem_ros_time_Time con
 {
   const std::string rosMessageType("ros_time/Time");
 
-  msgPtr->sec =  busPtr->Sec;
   msgPtr->nsec =  busPtr->Nsec;
+  msgPtr->sec =  busPtr->Sec;
 }
 
 void convertToBus(SL_Bus_hoffmansubsystem_ros_time_Time* busPtr, ros::Time const* msgPtr)
 {
   const std::string rosMessageType("ros_time/Time");
 
-  busPtr->Sec =  msgPtr->sec;
   busPtr->Nsec =  msgPtr->nsec;
+  busPtr->Sec =  msgPtr->sec;
 }
 
 
